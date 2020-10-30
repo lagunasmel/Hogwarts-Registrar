@@ -16,7 +16,23 @@ def index():
 @hogwarts.route('/students')
 def students():
     data = {'title': "Students"}
-    return render_template('students.html', data=data)
+    form_inputs = [
+        {"name": "name", "placeholder": "Name of Student?"},
+        {"name": "houseName", "placeholder": "Name of House?"},
+        {"name": "year", "type": "number", "placeholder": "Year of Student?"},
+        {"name": "prefect", "type": "checkbox", "label": "Is student a prefect?"},
+        {"name": "submit", "type": "button", "value": "Add Student"}
+    ]
+    data['inputs'] = form_inputs
+    table = {
+        "caption": "Student Data",
+        "headers": ["Student Name", "House Name", "Year", "Prefect?"],
+        "rows": [
+            ["Hermione", "Gryffindor", "5", "No"]
+        ]
+    }
+    data['table'] = table
+    return render_template('content.html', data=data)
 
 
 @hogwarts.route('/instructors')
@@ -44,4 +60,4 @@ def enrollments():
 
 
 if __name__ == '__main__':
-    hogwarts.run()
+    hogwarts.run(debug=True)
