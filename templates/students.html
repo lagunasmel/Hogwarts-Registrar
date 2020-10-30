@@ -1,0 +1,12 @@
+{% extends "content.html" %}
+
+{% block addFormBody %}
+    <input type="text" name="name" id="newName" placeholder="Name of Student?">
+    <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
+    <input type="number" name="year" id="newYear" placeholder="Year of Student?">
+    <label for="prefect">Is student a prefect?</label>
+    <input type="checkbox" name="prefect" id="newPrefect">
+    <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
+    <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
+    <input type="button" value="Add Student" name="Add Student" id="addStudentSubmit">
+{% endblock %}

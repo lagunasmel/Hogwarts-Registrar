@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% macro input(name, value='', placeholder='', type='text', size=20) -%}
+    <input type="{{ type }}" name="{{ name }}" value="{{ value|e }}" size="{{ size }}">
+{%- endmacro %}
 
+{% block heading %}
+
+    <h1>{{ data.title }}</h1>
+
+{% endblock %}
+
+{% block addForm %}
+    <form>
+        {% block addFormBody %}
+        {% endblock %}
+    </form>
 {% endblock %}

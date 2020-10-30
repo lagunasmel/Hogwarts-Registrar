@@ -26,29 +26,34 @@
                         <a class="nav-link" href="/">Home </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/students">Students</a>
+                        <a class="nav-link" href={{ url_for('students') }}>Students</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/instructors">Instructors</a>
+                        <a class="nav-link" href={{ url_for('instructors') }}>Instructors</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/classes">Classes</a>
+                        <a class="nav-link" href={{ url_for('classes') }}>Classes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/houses">Houses</a>
+                        <a class="nav-link" href={{ url_for('houses') }}>Houses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/enrollments">Enrollments</a>
+                        <a class="nav-link" href={{ url_for('enrollments') }}>Enrollments</a>
                     </li>
                 </ul>
             </div>
         </nav>
     {% endblock %}
 </section>
-<section id="content">
-    {% block content %}
+<section id="heading">
+    {% block heading %}
     {% endblock %}
 </section>
+<section id="addForm">
+    {% block addForm %}
+    {% endblock %}
+</section>
+<section id=""
 {% block body %}
 {% endblock %}
 </body>

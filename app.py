@@ -15,27 +15,32 @@ def index():
 
 @hogwarts.route('/students')
 def students():
-    return render_template('content.html')
+    data = {'title': "Students"}
+    return render_template('students.html', data=data)
 
 
 @hogwarts.route('/instructors')
 def instructors():
-    return render_template('content.html')
+    data = {'title': "Instructors"}
+    return render_template('content.html', data=data)
 
 
 @hogwarts.route('/classes')
 def classes():
-    return render_template('content.html')
+    data = {'title': "Classes"}
+    return render_template('content.html', data=data)
 
 
 @hogwarts.route('/houses')
 def houses():
-    return render_template('content.html')
+    data = {'title': "Houses"}
+    return render_template('content.html', data=data)
 
 
 @hogwarts.route('/enrollments')
 def enrollments():
-    return render_template('content.html')
+    data = {'title': "Enrollments"}
+    return render_template('content.html', data=data)
 
 
 if __name__ == '__main__':
