@@ -10,19 +10,7 @@ def hello_world():
 
 @hogwarts.route('/')
 def index():
-    posts = [
-        {'title': 'First Post',
-         'author': 'Mel',
-         'date': 'April 20',
-         'content': 'First Blog post'
-         },
-        {'title': '2nd Post',
-         'author': 'Mel',
-         'date': 'April 26',
-         'content': '2nd Blog post'
-         }
-    ]
-    return render_template('index.html', posts=posts)
+    return render_template('index.html')
 
 
 @hogwarts.route('/students')
