@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+
+{#Instructors : records the details of instructors currently teaching at Hogwarts#}
+{#- instructorID: INT, unique, auto_increment, not NULL, PK#}
+{#- name: VARCHAR(250), not unique, not NULL#}
+{#- houseID: INT, FK for houseID in Houses#}
+{#- patronus: VARCHAR(250)#}
+{#- wandType: VARCHAR(250), not NULL#}
+{#- Relationships:#}
+{#- Classes:Instructors - M: 1, with ‘instructorID’ in Classes being a FK for ‘instructorID’ in#}
+{#Instructors. However, this relationship is optional from the Classes end: an instructor#}
+{#can teach 0 classes.#}
+{#- Instructors:Houses - M: 1, with ‘houseID’ in Instructors being a FK for ‘houseID’ in#}
+{#Houses#}
+
+{%  block body %}
+<div class="container">
+    <h1>Add An Instructor</h1>
+    <input type="text" name="name" id="newName" placeholder="Name of Instructor?">
+    <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
+    <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
+    <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
+    <input type="button" value="Add Instructor" name="Add Instructor" id="addInstructorSubmit">
+<h2>View Current instructors</h2>
+<h3>{Table with list of instructors here}</h3>
+</div>
+{%  endblock body %}
