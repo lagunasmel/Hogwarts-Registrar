@@ -1,8 +1,6 @@
-{% extends "layouts/base.html" %}
-{%  block body %}
+{% extends "content.html" %}
 
-<div class="container">
-    <h1>Add a Student</h1>
+{% block addFormBody %}
     <input type="text" name="name" id="newName" placeholder="Name of Student?">
     <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
     <input type="number" name="year" id="newYear" placeholder="Year of Student?">
@@ -11,9 +9,4 @@
     <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
     <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
     <input type="button" value="Add Student" name="Add Student" id="addStudentSubmit">
-
-    <h2>View Current students</h2><p></p>
-    <h3>{Table with list of students here}</h3>
-</div>
-
-{%  endblock body %}
+{% endblock %}

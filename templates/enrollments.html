@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{%  block body %}
+
+<div class="container">
+    <h1>Enroll Student in Term</h1>
+    <input type="text" name="studentID" id="studentID" placeholder="Student ID">
+    <input type="text" name="classID" id="classID" placeholder="Class ID">
+    <input type="text" name="finished" id="finished" placeholder="Finished?">
+    <input type="number" name="rating" id="rating" placeholder="Rating">
+    <input type="number" min='990' name="rating" id="rating" placeholder="Year">
+
+    <input type="button" value="Add Enrollment" name="Add Enrollment" id="enrollmentSubmit">
+<h2>View Current Enrollments</h2>
+<h4>{Table with list of current enrollments here}</h4>
+</div>
+{%  endblock body %}
