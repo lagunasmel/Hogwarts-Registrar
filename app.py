@@ -8,54 +8,74 @@ def index():
     return render_template('index.html')
 
 
-# @hogwarts.route('/students')
-# def students():
-#     data = {'title': "Students"}
-#     form_inputs = [
-#         {"name": "name", "placeholder": "Name of Student?"},
-#         {"name": "houseName", "placeholder": "Name of House?"},
-#         {"name": "year", "type": "number", "placeholder": "Year of Student?"},
-#         {"name": "prefect", "type": "checkbox", "label": "Is student a prefect?"},
-#         {"name": "submit", "type": "button", "value": "Add Student"}
-#     ]
-#     data['inputs'] = form_inputs
-#     table = {
-#         "caption": "Student Data",
-#         "headers": ["Student Name", "House Name", "Year", "Prefect?"],
-#         "rows": [
-#             ["Hermione", "Gryffindor", "5", "No"]
-#         ]
-#     }
-#     data['table'] = table
-#     return render_template('macros.html', data=data)
-
 # Current students route for now!
 @hogwarts.route('/students')
 def students():
-    return render_template('students.html')
+    data = {'title': "Students"}
+    table = {
+        "caption": "Student Data",
+        "headers": ["Student Name", "House Name", "Year", "Prefect?"],
+        "rows": [
+            ["Hermione", "Gryffindor", "5", "No"]
+        ]
+    }
+    data['table'] = table
+    return render_template('students.html', data=data)
 
 
 @hogwarts.route('/instructors')
 def instructors():
     data = {'title': "Instructors"}
+    table = {
+        "caption": "Instructor Data",
+        "headers": ["Instructor Name", "House Name"],
+        "rows": [
+            ["Minerva McGonagall", "Gryffindor"]
+        ]
+    }
+    data['table'] = table
     return render_template('instructors.html', data=data)
 
 
 @hogwarts.route('/classes')
 def classes():
     data = {'title': "Classes"}
+    table = {
+        "caption": "Classes Data",
+        "headers": ["Class Name", "Instructor Name", "Max Size"],
+        "rows": [
+            ["Advanced Potions", "Severus Snape", "25"]
+        ]
+    }
+    data['table'] = table
     return render_template('classes.html', data=data)
 
 
 @hogwarts.route('/houses')
 def houses():
     data = {'title': "Houses"}
+    table = {
+        "caption": "Houses Data",
+        "headers": ["House Name", "Founder Name", "House Animal", "Number of Points"],
+        "rows": [
+            ["Gryffindor", "Godric Gryffindor", "Lion", "25"]
+        ]
+    }
+    data['table'] = table
     return render_template('houses.html', data=data)
 
 
 @hogwarts.route('/enrollments')
 def enrollments():
     data = {'title': "Enrollments"}
+    table = {
+        "caption": "Student Enrollment Data",
+        "headers": ["Student Name", "Class Name", "Finished?", "Rating"],
+        "rows": [
+            ["Hermione Granger", "Advanced Potions", "No", "N/A"]
+        ]
+    }
+    data['table'] = table
     return render_template('enrollments.html', data=data)
 
 

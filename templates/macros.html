@@ -1,4 +1,4 @@
-{% macro inputMacro(name, value='', placeholder='', type='text', size=20, label=None) -%}
+{% macro input(name, value='', placeholder='', type='text', size=20, label=None) -%}
     <div class="form-group">
         {% if label %}
             <label for="{{ "new" ~ name }}">{{ label }}</label>
@@ -12,19 +12,23 @@
 
 
 
-{% macro tableMacro(caption, headers, rows) %}
-    <table>
+{% macro table(caption, headers, rows) %}
+    <table class="data-table">
         <caption>{{ caption }}</caption>
         <tr>
             {% for header in headers %}
                 <th>{{ header }}</th>
             {% endfor %}
+            <th>Edit Data</th>
+            <th>Delete Data</th>
         </tr>
         {% for row in rows %}
             <tr>
                 {% for cell in row %}
                     <td>{{ cell }}</td>
                 {% endfor %}
+                <td><i class="far fa-edit"></i></td>
+                <td><i class="far fa-trash-alt"></i></td>
             </tr>
         {% endfor %}
     </table>
