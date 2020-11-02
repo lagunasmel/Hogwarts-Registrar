@@ -3,7 +3,6 @@ from flask import Flask, render_template
 hogwarts = Flask(__name__)
 
 
-
 @hogwarts.route('/')
 def index():
     return render_template('index.html')
@@ -28,7 +27,7 @@ def index():
 #         ]
 #     }
 #     data['table'] = table
-#     return render_template('content.html', data=data)
+#     return render_template('macros.html', data=data)
 
 # Current students route for now!
 @hogwarts.route('/students')

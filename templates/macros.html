@@ -11,29 +11,18 @@
 
 {%- endmacro %}
 
-{% block heading %}
 
-    <h1>{{ data.title }}</h1>
 
-{% endblock %}
 
-{% block addForm %}
-    <form>
-        {% for input in data.inputs %}
-            {{ inputMacro(**input) }}
-        {% endfor %}
-    </form>
-{% endblock %}
-
-{% block table %}
+{% macro tableMacro(caption, headers, rows) %}
     <table>
-        <caption>{{ data.table.caption }}</caption>
+        <caption>{{ caption }}</caption>
         <tr>
-            {% for header in data.table.headers %}
+            {% for header in headers %}
                 <th>{{ header }}</th>
             {% endfor %}
         </tr>
-        {% for row in data.table.rows %}
+        {% for row in rows %}
             <tr>
                 {% for cell in row %}
                     <td>{{ cell }}</td>
@@ -41,4 +30,4 @@
             </tr>
         {% endfor %}
     </table>
-{% endblock %}
+{%- endmacro %}
