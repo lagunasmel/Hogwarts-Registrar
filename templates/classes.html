@@ -1,15 +1,19 @@
 {% extends "layouts/base.html" %}
+{% import 'macros.html' as macros %}
 
-{%  block body %}
 
-<div class="container">
-    <h1>Add A Class</h1>
-    <input type="text" name="name" id="newName" placeholder="Class Title?">
-    <input type="text" name="classInstructor" id="classInstructor" placeholder="Name of Class Instructor?">
-    <input type="number" name="classSize" id="classSize" placeholder="Max Class Size?">
-    <input type="text" name="classDescription" id="classDescription" placeholder="Brief Course Description">
-    <input type="button" value="Add Class" name="Add Class" id="addClassSubmit">
-<h2>View Current Classes</h2>
-<h4>{Table with list of classes here}</h4>
-</div>
-{%  endblock body %}
+{% block body %}
+
+    <div class="container">
+        <h1>Add A Class</h1>
+        <input type="text" name="name" id="newName" placeholder="Class Title?">
+        <input type="text" name="classInstructor" id="classInstructor" placeholder="Name of Class Instructor?">
+        <input type="number" name="classSize" id="classSize" placeholder="Max Class Size?">
+        <input type="text" name="classDescription" id="classDescription" placeholder="Brief Course Description">
+        <input type="button" value="Add Class" name="Add Class" id="addClassSubmit">
+        <h2>View Current Classes</h2>
+        <h4>{Table with list of classes here}</h4>
+        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+
+    </div>
+{% endblock body %}

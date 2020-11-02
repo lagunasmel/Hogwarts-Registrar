@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% import 'macros.html' as macros %}
 
 
 {#Houses: records the details of the Hogwarts Houses#}
@@ -9,19 +10,21 @@
 {#- colors: VARCHAR, not NULL#}
 {#- points: INT, not NULL#}
 
-{%  block body %}
+{% block body %}
 
-<div class="container">
+    <div class="container">
 
-    <h1>Add A House</h1>
-    <input type="text" name="houseName" id="newHouseName" placeholder="Name of House">
-    <input type="text" name="houseFounder" id="newHouseFounder" placeholder="House Founder">
-    <input type="text" name="houseAnimal" id="houseAnimal" placeholder="House mascot/animal">
-    <input type="text" name="houseColor" id="houseColor" placeholder="House colors">
-    <input type="number" name="housePoints" id="housePoints" placeholder="House Points">
-    <input type="button" value="Add House" name="Add House" id="addHouseSubmit">
+        <h1>Add A House</h1>
+        <input type="text" name="houseName" id="newHouseName" placeholder="Name of House">
+        <input type="text" name="houseFounder" id="newHouseFounder" placeholder="House Founder">
+        <input type="text" name="houseAnimal" id="houseAnimal" placeholder="House mascot/animal">
+        <input type="text" name="houseColor" id="houseColor" placeholder="House colors">
+        <input type="number" name="housePoints" id="housePoints" placeholder="House Points">
+        <input type="button" value="Add House" name="Add House" id="addHouseSubmit">
 
-<h2>View All Houses</h2>
-<h4>{Table with list of Houses here - should only be 4}</h4>
-</div>
-{%  endblock body %}
+        <h2>View All Houses</h2>
+        <h4>{Table with list of Houses here - should only be 4}</h4>
+        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+
+    </div>
+{% endblock body %}

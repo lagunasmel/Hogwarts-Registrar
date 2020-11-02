@@ -1,15 +1,18 @@
 {% extends "layouts/base.html" %}
+{% import 'macros.html' as macros %}
 
-{%  block body %}
+{% block body %}
 
-<div class="container">
-    <h1>Add An Instructor</h1>
-    <input type="text" name="name" id="newName" placeholder="Name of Instructor?">
-    <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
-    <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
-    <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
-    <input type="button" value="Add Instructor" name="Add Instructor" id="addInstructorSubmit">
-<h2>View Current instructors</h2>
-<h4>{Table with list of instructors here}</h4>
-</div>
-{%  endblock body %}
+    <div class="container">
+        <h1>Add An Instructor</h1>
+        <input type="text" name="name" id="newName" placeholder="Name of Instructor?">
+        <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
+        <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
+        <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
+        <input type="button" value="Add Instructor" name="Add Instructor" id="addInstructorSubmit">
+        <h2>View Current instructors</h2>
+        <h4>{Table with list of instructors here}</h4>
+        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+
+    </div>
+{% endblock body %}
