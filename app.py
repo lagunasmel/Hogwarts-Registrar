@@ -20,6 +20,7 @@ def students():
         ]
     }
     data['table'] = table
+    data['housenames'] = [(1, 'NULL'), (2, 'House1')]
     return render_template('students.html', data=data)
 
 
