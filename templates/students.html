@@ -1,27 +1,33 @@
 {% extends "layouts/base.html" %}
+{% set active_page = "students" %}
 {% import 'macros.html' as macros %}
 
 {% block body %}
 
     <div class="container">
-        <h1>Add a Student</h1>
-        <input type="text" name="name" id="newName" placeholder="Name of Student?">
-        <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
-        <input type="number" name="year" id="newYear" placeholder="Year of Student?">
-        <label for="prefect">Is student a prefect?</label>
-        <input type="checkbox" name="prefect" id="newPrefect">
-        <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
-        <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
-        <input type="button" value="Add Student" name="Add Student" id="addStudentSubmit">
+        <h3>Add a Student</h3>
+        <form class="">
+            <input type="text" name="name" id="newName" placeholder="Name of Student?">
 
-        <h2>View Current students</h2>
-        <p></p>
-        <h3>{Table with list of students here}</h3>
-
-        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+            <select class="form-control" id="newHouseHame">
+                {% for house in data.housenames %}
+                    <option value="{{ house[0] }}">{{ house[1] }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
+            <input type="number" name="year" id="newYear" placeholder="Year of Student?">
+            <label for="prefect">Is student a prefect?</label>
+            <input type="checkbox" name="prefect" id="newPrefect">
+            <input type="text" name="patronus" id="newPatronus" placeholder="Type of patronus?">
+            <input type="text" name="wandtype" id="newWandtype" placeholder="Type of wand?">
+            <input type="button" value="Add Student" name="Add Student" id="addStudentSubmit">
+        </form>
 
         <h3>Search for a Student</h3>
         <input type="text" placeholder="Search by student name..." size="50">
+        <p></p>
+        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+
 
     </div>
 

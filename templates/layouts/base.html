@@ -1,16 +1,32 @@
+{% set navigation_bar = [
+    ('index', 'Home'),
+    ('students', 'Students'),
+    ('instructors', 'Instructors'),
+    ('classes', 'Classes'),
+    ('houses', 'Houses'),
+    ('enrollments', 'Enrollments')
+] -%}
+
+{% set active_page = active_page|default('index') -%}
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {#    Bootstrap CSS (JS at the bottom of body) #}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    {#    Local CSS#}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {#    Fontawesome icon pack#}
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/js/all.min.js"
             integrity="sha256-HkXXtFRaflZ7gjmpjGQBENGnq8NIno4SDNq/3DbkMgo="
             crossorigin="anonymous"
     ></script>
+
     <title>{% block title %}{% endblock %} Hogwarts Registrar</title>
     {% block head %}{% endblock %}
 </head>
@@ -27,24 +43,12 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/">Home </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('students') }}>Students</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('instructors') }}>Instructors</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('classes') }}>Classes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('houses') }}>Houses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ url_for('enrollments') }}>Enrollments</a>
-                    </li>
+                    {% for id, caption in navigation_bar %}
+                        <li class="nav-link {% if id == active_page %} active {% endif %}">
+                            <a class="nav-link" href="{{ url_for(id) }}">{{ caption }}</a>
+                        </li>
+                    {% endfor %}
+                    
                 </ul>
             </div>
         </nav>
@@ -54,6 +58,21 @@
 {% block body %}
 {% endblock body %}
 
+{#Bootstrap JS files#}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+<script type="text/javascript">$(".nav .nav-link").on("click", function () {
+    $(".nav").find(".active").removeClass("active");
+    $(this).addClass("active");
+});</script>
 
 </body>
 </html>
