@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(host=db_info.hostname, user=db_info.username, pas
 c = mydb.cursor()
 db_name = db_info.path[1:]
 c.execute(f'USE {db_name}')
-c.execute("SELECT * FROM houses;")
+c.execute("SELECT * FROM Houses;")
 mydb.close()
 
 hogwarts = Flask(__name__)

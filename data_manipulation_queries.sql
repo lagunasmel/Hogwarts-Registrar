@@ -8,6 +8,7 @@ VALUES (:nameInput, :yearInput, :patronusInput, :wandInput, :prefectInput,
 
 # Search student by name (select)
 
+
 # Update a student row
 
 # Delete a student row
