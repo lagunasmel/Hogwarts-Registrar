@@ -28,4 +28,20 @@
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Houses") }}
 
     </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/client.js') }}">
+    </script>
+
+    <script type="text/javascript">
+        function deleteHouse(rowId) {
+            deleteRowTemplate("{{ url_for('delete_row') }}", "Houses", rowId)
+        };
+
+        $('.delete-button').each((i, obj) => {
+            console.log(obj.dataset.rowid)
+            obj.addEventListener("click", (e) => {
+                deleteHouse(obj.dataset.rowid);
+            });
+        });
+    </script>
 {% endblock body %}

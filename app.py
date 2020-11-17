@@ -1,4 +1,5 @@
 from flask import Flask, render_template, g
+from flask import request as req
 import os
 import urllib
 import mysql.connector
@@ -165,6 +166,32 @@ def enrollments():
     }
     data['table'] = table
     return render_template('houses.html', data=data)
+
+
+@hogwarts.route('/_delete-row', methods=['POST'])
+def delete_row():
+    request = req.get_json()
+    row_id = request['rowId']
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    if request['tableName'] == 'Students':
+        c.execute("""DELETE
+                        FROM Students
+                        WHERE studentID = %s;""", (row_id,))
+        db.commit()
+        return students()
+    elif request['tableName'] == 'Instructors':
+        c.execute("""DELETE FROM Instructors WHERE instructorID = %s;""", (row_id,))
+        db.commit()
+        return instructors()
+    elif request['tableName'] == 'Classes':
+        c.execute("""DELETE FROM Classes WHERE classID = %s;""", (row_id,))
+        db.commit()
+        return classes()
+    elif request['tableName'] == 'Houses':
+        c.execute("""DELETE FROM Houses WHERE houseID = %s;""", (row_id,))
+        db.commit()
+        return houses()
 
 
 if __name__ == '__main__':

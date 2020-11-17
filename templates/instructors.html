@@ -19,4 +19,21 @@
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Instructors") }}
 
     </div>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='js/client.js') }}">
+    </script>
+
+    <script type="text/javascript">
+        function deleteInstructor(rowId) {
+            deleteRowTemplate("{{ url_for('delete_row') }}", "Instructors", rowId)
+        };
+
+        $('.delete-button').each((i, obj) => {
+            console.log(obj.dataset.rowid)
+            obj.addEventListener("click", (e) => {
+                deleteInstructor(obj.dataset.rowid);
+            });
+        });
+    </script>
+
 {% endblock body %}

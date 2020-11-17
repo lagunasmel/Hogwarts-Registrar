@@ -23,12 +23,20 @@
             <th>Delete Data</th>
         </tr>
         {% for row in rows %}
-            <tr data-id="{{ row[id_col_name] }}">
+            <tr data-rowId="{{ row[id_col_name] }}">
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
                 {% endfor %}
-                <td><i class="far fa-edit"></i></td>
-                <td><i class="far fa-trash-alt"></i></td>
+                <td>
+                    <button class="edit-button" data-rowid="{{ row[id_col_name] }}">
+                        <i class="far fa-edit"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="delete-button" data-rowId="{{ row[id_col_name] }}">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </td>
             </tr>
         {% endfor %}
     </table>
