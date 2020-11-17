@@ -25,7 +25,7 @@
 
         <h2>View All Houses</h2>
         <h4>{Table with list of Houses here - should only be 4}</h4>
-        {{ macros.table(data.table.caption, data.table.headers, data.table.rows, "Houses") }}
+        {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Houses") }}
 
     </div>
 {% endblock body %}

@@ -104,12 +104,20 @@ def instructors():
 @hogwarts.route('/classes')
 def classes():
     data = {'title': "Classes"}
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    c.execute(
+        """SELECT c.classID, c.name className, i.name instructorName, c.maxSize, c.description
+            FROM Classes AS c
+            INNER JOIN Instructors i on c.instructorID = i.instructorID;""")
+    rows = c.fetchall()
+
     table = {
-        "caption": "Classes Data",
-        "headers": ["Class Name", "Instructor Name", "Max Size"],
-        "rows": [
-            ["Advanced Potions", "Severus Snape", "25"]
-        ]
+        "caption": "CLasses Data",
+        "headers": ["Class Name", "Instructor Name", "Max Size", "Description"],
+        "columns": ['className', 'instructorName', 'maxSize', 'description'],
+        "id_col_name": 'classID',
+        "rows": rows
     }
     data['table'] = table
     return render_template('classes.html', data=data)
@@ -118,12 +126,19 @@ def classes():
 @hogwarts.route('/houses')
 def houses():
     data = {'title': "Houses"}
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    c.execute(
+        """SELECT houseID, name, founder, animal, colors, points
+            FROM Houses;""")
+    rows = c.fetchall()
+
     table = {
         "caption": "Houses Data",
-        "headers": ["House Name", "Founder Name", "House Animal", "Number of Points"],
-        "rows": [
-            ["Gryffindor", "Godric Gryffindor", "Lion", "25"]
-        ]
+        "headers": ["House Name", "Founder", "House Animal", "House Colors", "Points"],
+        "columns": ['name', 'founder', 'animal', 'colors", "points'],
+        "id_col_name": 'houseID',
+        "rows": rows
     }
     data['table'] = table
     return render_template('houses.html', data=data)
@@ -132,15 +147,24 @@ def houses():
 @hogwarts.route('/enrollments')
 def enrollments():
     data = {'title': "Enrollments"}
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    c.execute(
+        """SELECT s.name studentName, c.name className, sce.finished, sce.rating, sce.year, sce.term
+            FROM StudentClassEnrollments AS sce
+            INNER JOIN Students AS s ON sce.studentID = s.studentID
+            INNER JOIN Classes AS c ON sce.classID = c.classID;""")
+    rows = c.fetchall()
+
     table = {
-        "caption": "Student Enrollment Data",
-        "headers": ["Student Name", "Class Name", "Finished?", "Rating"],
-        "rows": [
-            ["Hermione Granger", "Advanced Potions", "No", "N/A"]
-        ]
+        "caption": "Enrollments Data",
+        "headers": ["Student Name", "Class Name", "Finished?", "Rating", "Year", "Term"],
+        "columns": ['studentName', 'className', 'finished', 'rating', 'year', 'term'],
+        "id_col_name": 'studentID',
+        "rows": rows
     }
     data['table'] = table
-    return render_template('enrollments.html', data=data)
+    return render_template('houses.html', data=data)
 
 
 if __name__ == '__main__':

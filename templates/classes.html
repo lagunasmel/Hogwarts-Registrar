@@ -14,7 +14,7 @@
         <input type="button" value="Add Class" name="Add Class" id="addClassSubmit">
         <h2>View Current Classes</h2>
         <h4>{Table with list of classes here}</h4>
-        {{ macros.table(data.table.caption, data.table.headers, data.table.rows, "Classes") }}
+        {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Classes") }}
 
     </div>
 {% endblock body %}
