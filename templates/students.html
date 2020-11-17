@@ -14,7 +14,6 @@
                     <option value="{{ house[0] }}">{{ house[1] }}</option>
                 {% endfor %}
             </select>
-            <input type="text" name="houseName" id="newHouseName" placeholder="Name of House?">
             <input type="number" name="year" id="newYear" placeholder="Year of Student?">
             <label for="prefect">Is student a prefect?</label>
             <input type="checkbox" name="prefect" id="newPrefect">
@@ -26,7 +25,7 @@
         <h3>Search for a Student</h3>
         <input type="text" placeholder="Search by student name..." size="50">
         <p></p>
-        {{ macros.table(data.table.caption, data.table.headers, data.table.rows) }}
+        {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Students") }}
 
 
     </div>
