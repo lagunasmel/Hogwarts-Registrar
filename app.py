@@ -167,6 +167,18 @@ def enrollments():
     data['table'] = table
     return render_template('enrollments.html', data=data)
 
+@hogwarts.route('/_insert-row', methods=['POST'])
+def insert_row():
+    request = req.get_json()
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    if request['tableName'] == 'Students':
+        c.execute("""INSERT INTO Students(name, year, patronus, wandType, prefect, houseID)
+                        VALUES (%s, %s, %s, %s, %s, %s);""",
+                  (name, year, patronus, wandType, prefect, houseID))
+        db.commit()
+        return students()
+
 
 @hogwarts.route('/_delete-row', methods=['POST'])
 def delete_row():

@@ -1,3 +1,5 @@
+console.log("Connected to client.js")
+
 function deleteRowTemplate(url, tableName, rowId) {
     $.ajax(url, {
         contentType: "application/json",
