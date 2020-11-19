@@ -137,7 +137,7 @@ def houses():
     table = {
         "caption": "Houses Data",
         "headers": ["House Name", "Founder", "House Animal", "House Colors", "Points"],
-        "columns": ['name', 'founder', 'animal', 'colors", "points'],
+        "columns": ['name', 'founder', 'animal', 'colors', 'points'],
         "id_col_name": 'houseID',
         "rows": rows
     }
