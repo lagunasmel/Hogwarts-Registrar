@@ -6,14 +6,28 @@
 {% block body %}
 
     <div class="container w-75 mt-4 mb-4">
-        <h1>Add A Class</h1>
-        <input type="text" name="name" id="newName" placeholder="Class Title?">
-        <input type="text" name="classInstructor" id="classInstructor" placeholder="Name of Class Instructor?">
-        <input type="number" name="classSize" id="classSize" placeholder="Max Class Size?">
-        <input type="text" name="classDescription" id="classDescription" placeholder="Brief Course Description">
-        <input type="button" value="Add Class" name="Add Class" id="addClassSubmit">
+        <h2>Add A Class</h2>
+
+        <div class="form-group">
+            <label for="newName">Class Title</label>
+            <br><input type="text" name="name" id="newName" class="form-control w-50">
+
+            <br><label for="classInstructor">Name of Class Instructor</label>
+            <br><input type="text" name="classInstructor" id="classInstructor" class="form-control w-50">
+
+            <br><label for="classSize">Max Class Size</label>
+            <input type="number" name="classSize" id="classSize" class="form-control w-25">
+
+            <br><label for="classDescription">Brief Course Description</label>
+            <input type="text" name="classDescription" id="classDescription" class="form-control w-75">
+
+            <br><input type="button" value="Add Class" name="Add Class" id="addClassSubmit"
+                       class="btn btn-primary">
+
+        </div>
+
+        <p></p>
         <h2>View Current Classes</h2>
-        <h4>{Table with list of classes here}</h4>
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Classes") }}
 
     </div>
