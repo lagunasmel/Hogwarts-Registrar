@@ -13,7 +13,7 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container w-75 mt-4 mb-4">
 
         <h1>Add A House</h1>
         <input type="text" name="houseName" id="newHouseName" placeholder="Name of House">
@@ -23,8 +23,9 @@
         <input type="number" name="housePoints" id="housePoints" placeholder="House Points">
         <input type="button" value="Add House" name="Add House" id="addHouseSubmit">
 
+        <p></p>
         <h2>View All Houses</h2>
-        <h4>{Table with list of Houses here - should only be 4}</h4>
+
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Houses") }}
 
     </div>
