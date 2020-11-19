@@ -151,7 +151,7 @@ def enrollments():
     db = get_db()
     c = db.cursor(dictionary=True)
     c.execute(
-        """SELECT s.name studentName, c.name className, sce.finished, sce.rating, sce.year, sce.term
+        """SELECT sce.enrollmentID, s.name studentName, c.name className, sce.finished, sce.rating, sce.year, sce.term
             FROM StudentClassEnrollments AS sce
             INNER JOIN Students AS s ON sce.studentID = s.studentID
             INNER JOIN Classes AS c ON sce.classID = c.classID;""")
@@ -161,11 +161,11 @@ def enrollments():
         "caption": "Enrollments Data",
         "headers": ["Student Name", "Class Name", "Finished?", "Rating", "Year", "Term"],
         "columns": ['studentName', 'className', 'finished', 'rating', 'year', 'term'],
-        "id_col_name": 'studentID',
+        "id_col_name": 'enrollmentID',
         "rows": rows
     }
     data['table'] = table
-    return render_template('houses.html', data=data)
+    return render_template('enrollments.html', data=data)
 
 
 @hogwarts.route('/_delete-row', methods=['POST'])
@@ -192,6 +192,10 @@ def delete_row():
         c.execute("""DELETE FROM Houses WHERE houseID = %s;""", (row_id,))
         db.commit()
         return houses()
+    elif request['tableName'] == 'StudentClassEnrollments':
+        c.execute("""DELETE FROM StudentClassEnrollments WHERE enrollmentID = %s;""", (row_id,))
+        db.commit()
+        return enrollments()
 
 
 if __name__ == '__main__':

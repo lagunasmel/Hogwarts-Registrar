@@ -49,13 +49,14 @@ CREATE TABLE Classes
 
 CREATE TABLE StudentClassEnrollments
 (
-    studentID INT(11) NOT NULL,
-    classID   INT(11) NOT NULL,
-    finished  BOOLEAN NOT NULL,
-    rating    INT(11),
-    year      INT(11) NOT NULL,
-    term      INT(11),
-    PRIMARY KEY (studentID, classID),
+    enrollmentID INT(11) AUTO_INCREMENT NOT NULL,
+    studentID    INT(11)                NOT NULL,
+    classID      INT(11)                NOT NULL,
+    finished     BOOLEAN                NOT NULL,
+    rating       INT(11),
+    year         INT(11)                NOT NULL,
+    term         INT(11),
+    PRIMARY KEY (enrollmentID),
     FOREIGN KEY (studentID) REFERENCES Students (studentID),
     FOREIGN KEY (classID) REFERENCES Classes (classID)
 );
