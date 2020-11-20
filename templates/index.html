@@ -1,7 +1,22 @@
 {% extends "layouts/base.html" %}
 
 {% block body %}
-    <div class="container">
-    Welcome to the Hogwarts Registrar!
+
+    <div class="container w-75 m-2 mx-auto">
+
+        <div class="jumbotron">
+            <h1 class="display-5">Welcome to the Hogwarts Registrar!</h1>
+            <p class="lead">Hogwarts School of Witchcraft and Wizardry is a world-leading centre of magical instruction,
+                with over 1,000 students who attend. Up until now, Hogwarts has relied on paper-based record keeping, leading to
+                large expenditure on quills and ink. Hogwarts now seeks to modernise its record keeping system to deal
+                with its ambitious plans to expand enrollment to over 10,000 students and has developed a SQL-based database system. </p>
+            <hr class="my-4">
+            <p class="lead"> What would you like to do? </p>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('students') }}" role="button">Add Student</a>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('instructors') }}" role="button">Add Instructor</a>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('classes') }}" role="button">Add Class</a>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('houses') }}" role="button">Add House</a>
+                <a class="btn btn-primary btn-lg" href="{{ url_for('enrollments') }}" role="button">Enroll Student In Class</a>
+        </div>
     </div>
 {% endblock body %}

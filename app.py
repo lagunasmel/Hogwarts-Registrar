@@ -163,6 +163,12 @@ def enrollments():
             INNER JOIN Classes AS c ON sce.classID = c.classID;""")
     rows = c.fetchall()
 
+    for row in rows:
+        if row['finished'] == 0:
+            row['finished'] = 'False'
+        else:
+            row['finished'] = 'True'
+
     table = {
         "caption": "Enrollments Data",
         "headers": ["Student Name", "Class Name", "Finished?", "Rating", "Year", "Term"],

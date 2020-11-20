@@ -6,15 +6,35 @@
 {% block body %}
 
     <div class="container w-75 mt-4 mb-4">
-        <h1>Enroll Student in Term</h1>
-        <input type="text" name="studentID" id="studentID" placeholder="Student ID">
-        <input type="text" name="classID" id="classID" placeholder="Class ID">
-        <input type="text" name="finished" id="finished" placeholder="Finished?">
-        <input type="number" name="rating" id="rating" placeholder="Rating">
-        <input type="number" min='990' name="rating" id="rating" placeholder="Year">
+        <h3>Enroll Student in Term</h3>
+        <div class="form-group">
 
-        <input type="button" value="Add Enrollment" name="Add Enrollment" id="enrollmentSubmit">
-        <h2>View Current Enrollments</h2>
+            <label for="studentID">Student ID number</label>
+            <br><input type="number" name="studentID" id="studentID" class="form-control w-25" min="1">
+
+            <label for="classID">Class ID</label>
+            <input type="number" name="classID" id="classID" class="form-control w-25" min="1">
+
+
+            <fieldset class="form-group">
+                <div class="form-check">
+                    <br><label for="finished" class="form-check-label">
+                    <input class="form-check-input" type="checkbox" name="finished" id="finished">
+                    Has the student completed this course? Check this box if so.
+                </label>
+                </div>
+            </fieldset>
+
+           <label for="rating">Rating</label>
+            <br><input type="number" name="rating" id="rating" placeholder="Rating" class="form-control w-25">
+
+            <br><label for="year">Student Year</label>
+            <br><input type="number" min="1" name="year" id="year" placeholder="Year" class="form-control w-25">
+            <br><input type="button" value="Add Enrollment" name="Add Enrollment" id="enrollmentSubmit" class="btn btn-primary">
+        </div>
+
+        <p></p>
+        <br><h3>View Current Enrollments</h3>
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "StudentClassEnrollments") }}
 
     </div>
