@@ -15,16 +15,31 @@
 
     <div class="container w-75 mt-4 mb-4">
 
-        <h1>Add A House</h1>
-        <input type="text" name="houseName" id="newHouseName" placeholder="Name of House">
-        <input type="text" name="houseFounder" id="newHouseFounder" placeholder="House Founder">
-        <input type="text" name="houseAnimal" id="houseAnimal" placeholder="House mascot/animal">
-        <input type="text" name="houseColor" id="houseColor" placeholder="House colors">
-        <input type="number" name="housePoints" id="housePoints" placeholder="House Points">
-        <input type="button" value="Add House" name="Add House" id="addHouseSubmit">
+        <h3>Add A House</h3>
+
+        <div class="form-group">
+            <label for="newHouseName">Name of House</label>
+            <br><input type="text" name="houseName" id="newHouseName" class="form-control w-50">
+
+            <br><label for="newHouseFounder">House Founder</label>
+            <br><input type="text" name="houseFounder" id="newHouseFounder" class="form-control w-50">
+
+            <br><label for="houseAnimal">House Mascot/Animal</label>
+            <br><input type="text" name="houseAnimal" id="houseAnimal" class="form-control w-50">
+
+            <br><label for="houseColor">House Colors</label>
+            <br><input type="text" name="houseColor" id="houseColor" class="form-control w-50">
+
+            <br><label for="housePoints">House Points</label>
+            <br><input type="number" name="housePoints" id="housePoints" class="form-control w-25" min="0">
+
+            <br><input type="button" value="Add House" name="Add House" id="addHouseSubmit" class="btn btn-primary">
+
+        </div>
+
 
         <p></p>
-        <h2>View All Houses</h2>
+        <h3>View All Houses</h3>
 
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Houses") }}
 
@@ -36,7 +51,7 @@
     <script type="text/javascript">
         function deleteHouse(rowId) {
             deleteRowTemplate("{{ url_for('delete_row') }}", "Houses", rowId)
-        };
+        }
 
         $('.delete-button').each((i, obj) => {
             console.log(obj.dataset.rowid)

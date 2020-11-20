@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container w-75 mt-4 mb-4">
-        <h2>Add An Instructor</h2>
+        <h3>Add An Instructor</h3>
 
         <div class="form-group">
             <label for="newName">Name of Instructor</label>
@@ -31,7 +31,7 @@
 
 
         <p></p>
-        <h2>View Current Instructors</h2>
+        <h3>View Current Instructors</h3>
         {{ macros.table(data.table.caption, data.table.headers, data.table.columns, data.table.id_col_name, data.table.rows, "Instructors") }}
 
     </div>
