@@ -7,13 +7,15 @@
 
     <div class="container w-75 mt-4 mb-4">
         <h3>Enroll Student in Term</h3>
+        <p>Enter student information to enroll them in a class. <br>Please note that we can only
+        enroll students currently attending Hogwarts.</p>
         <div class="form-group">
 
-            <label for="studentID">Student ID number</label>
-            <br><input type="number" name="studentID" id="studentID" class="form-control w-25" min="1">
+            <label for="studentID">Student Name (Full Name, i.e. 'Harry Potter')</label>
+            <br><input type="text" name="studentID" id="studentID" class="form-control w-50" min="1">
 
-            <label for="classID">Class ID</label>
-            <input type="number" name="classID" id="classID" class="form-control w-25" min="1">
+            <label for="classID">Class Name (i.e. 'Potions')</label>
+            <input type="text" name="classID" id="classID" class="form-control w-50" min="1">
 
 
             <fieldset class="form-group">
@@ -25,7 +27,7 @@
                 </div>
             </fieldset>
 
-           <label for="rating">Difficulty Rating (1 to 10)</label>
+           <label for="rating">Difficulty Rating (1 to 10, or can be left blank)</label>
             <br><input type="number" min="1" max="10" name="rating" id="rating" placeholder="Rating" class="form-control w-25">
 
             <br><label for="year">Student Year (1 to 7)</label>
