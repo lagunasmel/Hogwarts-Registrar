@@ -20,8 +20,11 @@
             {% for header in headers %}
                 <th scope="col">{{ header }}</th>
             {% endfor %}
+
             <th>Edit Data</th>
-            <th>Delete Data</th>
+            {% if sqlEntityName != "Houses" %}
+                <th>Delete Data</th>
+            {% endif %}
         </tr>
         </thead>
 
@@ -30,16 +33,19 @@
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
                 {% endfor %}
+
                 <td>
                     <button class="edit-button btn btn-info" data-rowid="{{ row[id_col_name] }}">
                         <i class="far fa-edit"></i>
                     </button>
                 </td>
-                <td>
-                    <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </td>
+                {% if sqlEntityName != "Houses" %}
+                    <td>
+                        <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </table>

@@ -16,3 +16,20 @@ function deleteRowTemplate(url, tableName, rowId) {
         }
     });
 }
+
+function addRowTemplate(url, tableName, data) {
+    $.ajax(url, {
+        contentType: "application/json",
+        data: JSON.stringify({
+            'tableName': tableName,
+            'request': 'add',
+            'data': data
+        }),
+        type: 'POST',
+        success: function (data) {
+            let newDoc = document.open("text/html", "replace");
+            newDoc.write(data);
+            newDoc.close();
+        }
+    });
+}

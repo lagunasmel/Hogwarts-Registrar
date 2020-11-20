@@ -30,7 +30,7 @@
                 </div>
             </fieldset>
 
-        
+
             <label for="newPatronus">Type of Patronus?</label>
             <input type="text" name="patronus" id="newPatronus" class="form-control w-50">
 
@@ -63,11 +63,28 @@
             deleteRowTemplate("{{ url_for('delete_row') }}", "Students", rowId)
         }
 
+        function addStudent(data) {
+            addRowTemplate("{{ url_for('insert_row') }}", "Students", data)
+        }
+
         $('.delete-button').each((i, obj) => {
             console.log(obj.dataset.rowid)
             obj.addEventListener("click", (e) => {
                 deleteStudent(obj.dataset.rowid);
             });
+        });
+
+        $('#addStudentSubmit').on('click', (e) => {
+            let data = {
+                'name': $('#newName').val(),
+                'houseID': $('#newHouseName').val(),
+                'year': $('#newYear').val(),
+                'patronus': $('#newPatronus').val(),
+                'wandType': $('#newWandType').val(),
+                'prefect': $('#newPrefect').is(':checked')
+            };
+
+            addStudent(data);
         });
     </script>
 

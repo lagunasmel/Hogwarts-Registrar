@@ -59,6 +59,12 @@ def students():
         ON s.houseID = h.houseID;""")
     rows = c.fetchall()
 
+    for row in rows:
+        if row['prefect'] == 0:
+            row['prefect'] = 'False'
+        else:
+            row['prefect'] = 'True'
+
     table = {
         "caption": "Student Data",
         "headers": ["Student Name", "House Name", "Year", "Prefect?", "Patronus", "Wand Type"],
@@ -167,15 +173,17 @@ def enrollments():
     data['table'] = table
     return render_template('enrollments.html', data=data)
 
+
 @hogwarts.route('/_insert-row', methods=['POST'])
 def insert_row():
     request = req.get_json()
     db = get_db()
     c = db.cursor(dictionary=True)
     if request['tableName'] == 'Students':
+        data = request['data']
         c.execute("""INSERT INTO Students(name, year, patronus, wandType, prefect, houseID)
                         VALUES (%s, %s, %s, %s, %s, %s);""",
-                  (name, year, patronus, wandType, prefect, houseID))
+                  (data['name'], data['year'], data['patronus'], data['wandType'], data['prefect'], data['houseID']))
         db.commit()
         return students()
 
