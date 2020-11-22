@@ -192,6 +192,22 @@ def insert_row():
                   (data['name'], data['year'], data['patronus'], data['wandType'], data['prefect'], data['houseID']))
         db.commit()
         return students()
+    elif request['tableName'] == 'Instructors':
+        data = request['data']
+        if data['houseID'] == '0':
+            data['houseID'] = None
+        c.execute("""INSERT INTO Instructors(name, patronus, wandType, houseID)
+                                VALUES (%s, %s, %s, %s);""",
+                  (data['name'], data['patronus'], data['wandType'], data['houseID']))
+        db.commit()
+        return instructors()
+    elif request['tableName'] == 'Classes':
+        data = request['data']
+        c.execute("""INSERT INTO Classes(name, maxSize, description, instructorID)
+                                        VALUES (%s, %s, %s, %s);""",
+                  (data['name'], data['patronus'], data['wandType'], data['houseID']))
+        db.commit()
+        return classes()
 
 
 @hogwarts.route('/_delete-row', methods=['POST'])

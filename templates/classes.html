@@ -40,11 +40,26 @@
             deleteRowTemplate("{{ url_for('delete_row') }}", "Classes", rowId)
         };
 
+        function addClass(data) {
+            addRowTemplate("{{ url_for('insert_row') }}", "Classes", data)
+        }
+
         $('.delete-button').each((i, obj) => {
             console.log(obj.dataset.rowid)
             obj.addEventListener("click", (e) => {
                 deleteClass(obj.dataset.rowid);
             });
+        });
+
+        $('#addClassSubmit').on('click', (e) => {
+            let data = {
+                'name': $('#newName').val(),
+                'instructor': $('#classInstructor').val(),
+                'size': $('#classSize').val(),
+                'description': $('#classDescription').val(),
+            };
+
+            addClass(data);
         });
     </script>
 {% endblock body %}

@@ -33,7 +33,7 @@ CREATE TABLE Instructors
     name         VARCHAR(250)                  NOT NULL,
     patronus     VARCHAR(250),
     wandType     VARCHAR(250),
-    houseID      INT                           NOT NULL,
+    houseID      INT,
     FOREIGN KEY (houseID) REFERENCES Houses (houseID)
 );
 
