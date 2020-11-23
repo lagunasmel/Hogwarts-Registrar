@@ -120,7 +120,7 @@ def classes():
     rows = c.fetchall()
 
     table = {
-        "caption": "CLasses Data",
+        "caption": "Classes Data",
         "headers": ["Class Name", "Instructor Name", "Max Size", "Description"],
         "columns": ['className', 'instructorName', 'maxSize', 'description'],
         "id_col_name": 'classID',
@@ -203,11 +203,43 @@ def insert_row():
         return instructors()
     elif request['tableName'] == 'Classes':
         data = request['data']
+        # First get the instructor's ID, assume it's the first one
+        c.execute("""SELECT instructorID FROM Instructors WHERE name = %s;""", (data['instructor'],))
+        rows = c.fetchall()
+        if len(rows) == 0:
+            return classes()
+        instructor_id = rows[0]['instructorID']
         c.execute("""INSERT INTO Classes(name, maxSize, description, instructorID)
                                         VALUES (%s, %s, %s, %s);""",
-                  (data['name'], data['patronus'], data['wandType'], data['houseID']))
+                  (data['name'], data['size'], data['description'], instructor_id))
         db.commit()
         return classes()
+    elif request['tableName'] == 'Houses':
+        data = request['data']
+        c.execute("""INSERT INTO Houses(name, founder, animal, colors, points)
+                                        VALUES (%s, %s, %s, %s, %s);""",
+                  (data['name'], data['founder'], data['animal'], data['colors'], data['points']))
+        db.commit()
+        return houses()
+    elif request['tableName'] == 'StudentClassEnrollments':
+        data = request['data']
+        # First get the student and class IDs
+        c.execute("""SELECT studentID FROM Students WHERE name = %s;""", (data['name'],))
+        student_rows = c.fetchall()
+        c.execute("""SELECT classID FROM Classes WHERE name = %s;""", (data['class'],))
+        class_rows = c.fetchall()
+        if len(student_rows) == 0 or len(class_rows) == 0:
+            return enrollments()
+        student_id = student_rows[0]['studentID']
+        class_id = class_rows[0]['classID']
+        # Clean the other data
+        if data['rating'] == "":
+            data['rating'] = None
+        c.execute("""INSERT INTO StudentClassEnrollments(studentID, classID, finished, rating, year, term)
+                                                VALUES (%s, %s, %s, %s, %s, %s);""",
+                  (student_id, class_id, data['finished'], data['rating'], data['year'], data['term']))
+        db.commit()
+        return enrollments()
 
 
 @hogwarts.route('/_delete-row', methods=['POST'])

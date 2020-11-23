@@ -53,11 +53,27 @@
             deleteRowTemplate("{{ url_for('delete_row') }}", "Houses", rowId)
         }
 
+        function addHouse(data) {
+            addRowTemplate("{{ url_for('insert_row') }}", "Houses", data)
+        }
+
         $('.delete-button').each((i, obj) => {
             console.log(obj.dataset.rowid)
             obj.addEventListener("click", (e) => {
                 deleteHouse(obj.dataset.rowid);
             });
+        });
+
+        $('#addHouseSubmit').on('click', (e) => {
+            let data = {
+                'name': $('#newHouseName').val(),
+                'founder': $('#newHouseFounder').val(),
+                'animal': $('#houseAnimal').val(),
+                'colors': $('#houseColor').val(),
+                'points': $('#housePoints').val()
+            };
+
+            addHouse(data);
         });
     </script>
 {% endblock body %}
