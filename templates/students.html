@@ -86,6 +86,22 @@
 
             addStudent(data);
         });
+
+        $('#searchStudentSubmit').on('click', (e) => {
+            let data = {'name': $('#searchStudent').val()}
+            $.ajax("{{ url_for('search_students') }}", {
+                contentType: "application/json",
+                data: JSON.stringify({
+                    'data': data
+                }),
+                type: 'POST',
+                success: function (data) {
+                    let newDoc = document.open("text/html", "replace");
+                    newDoc.write(data);
+                    newDoc.close();
+                }
+            });
+        })
     </script>
 
 {% endblock body %}

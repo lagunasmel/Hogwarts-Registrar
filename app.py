@@ -48,15 +48,24 @@ def index():
 
 # Current students route for now!
 @hogwarts.route('/students')
-def students():
+def students(search_str=None):
     data = {'title': "Students"}
     db = get_db()
     c = db.cursor(dictionary=True)
-    c.execute(
-        """SELECT s.studentID, s.name studentName, h.name houseName, s.year, s.prefect, s.patronus, s.wandType FROM 
-        Students AS s 
-        INNER JOIN Houses AS h 
-        ON s.houseID = h.houseID;""")
+    if search_str is None:
+        c.execute(
+            """SELECT s.studentID, s.name studentName, h.name houseName, s.year, s.prefect, s.patronus, s.wandType FROM 
+            Students AS s 
+            INNER JOIN Houses AS h 
+            ON s.houseID = h.houseID;""")
+    else:
+        search_str = '%' + search_str + '%'
+        c.execute(
+            """SELECT s.studentID, s.name studentName, h.name houseName, s.year, s.prefect, s.patronus, s.wandType FROM 
+            Students AS s 
+            INNER JOIN Houses AS h 
+            ON s.houseID = h.houseID
+            WHERE s.name LIKE %s;""", (search_str,))
     rows = c.fetchall()
 
     for row in rows:
@@ -78,6 +87,18 @@ def students():
     housenames = [(row['houseId'], row['name']) for row in rows]
     data['housenames'] = housenames
     return render_template('students.html', data=data)
+
+
+@hogwarts.route('/_search-students', methods=['POST'])
+def search_students():
+    request = req.get_json()
+    db = get_db()
+    c = db.cursor(dictionary=True)
+    data = request['data']
+    search_str = data['name']
+    if search_str == "":
+        search_str = None
+    return students(search_str)
 
 
 @hogwarts.route('/instructors')
