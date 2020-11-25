@@ -29,13 +29,14 @@
         </thead>
 
         {% for row in rows %}
-            <tr data-rowId="{{ row[id_col_name] }}">
+            <tr data-rowId="{{ row[id_col_name] }}" id="house{{ row[id_col_name] }}">
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
                 {% endfor %}
 
                 <td>
-                    <button class="edit-button btn btn-info" data-rowid="{{ row[id_col_name] }}">
+                    <button class="edit-button btn btn-info" data-rowid="{{ row[id_col_name] }}"
+                             data-toggle="modal" data-target="#editModal">
                         <i class="far fa-edit"></i>
                     </button>
                 </td>
@@ -49,4 +50,50 @@
             </tr>
         {% endfor %}
     </table>
+
+    {% if sqlEntityName == "Houses" %}
+        <!-- Edit Houses Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editHouseForm">
+
+                        <label for="editHouseNameInput">House Name</label><br>
+                        <input type="text" id="editHouseNameInput" name="editHouseName" class="form-control">
+
+                        <label for="editHouseFounderNameInput">Founder Name</label><br>
+                        <input type="text" id="editHouseFounderNameInput" name="editHouseFounderName" class="form-control">
+
+                        <label for="editHouseAnimalInput">House Animal</label><Br>
+                        <input type="text" id="editHouseAnimalInput" name="editHouseAnimal" class="form-control">
+
+                        <label for="editHouseColorsInput">House Colors</label><br>
+                        <input type="text" id="editHouseColorsInput" name="editHouseColors" class="form-control">
+
+                        <label for="editHousePointsInput">Points</label><br>
+                        <input type="number" id="editHousePointsInput" name="editHouseColors" class="form-control"
+                        min="0">
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+
 {%- endmacro %}

@@ -76,8 +76,35 @@
                 'colors': $('#houseColor').val(),
                 'points': $('#housePoints').val()
             };
-
             addHouse(data);
         });
+
+        $('.edit-button').each((i, obj) => {
+            obj.addEventListener("click", (e) => {
+                console.log('edit button clicked for house' + obj.dataset.rowid)
+                // grab the current table row data to fill the modal with
+                let $row = $('#' + 'house' + obj.dataset.rowid);
+                let rowInfo = []
+                let $tds = $row.find("td");
+                $.each($tds, function () {
+                    rowInfo.push($(this).text());
+                });
+                rowInfo.splice(-1)
+
+                console.log(rowInfo)
+                let houseNameInput = document.querySelector('#editHouseNameInput')
+                houseNameInput.value = rowInfo[0]
+
+
+            }); // event listener tag
+        }); // each tag
+
+        // update button within the modal
+        $('#updateSubmit').on('click', (e) => {
+            console.log('update button clicked')
+            // update house will get called here
+            $('#editModal').modal('hide');
+        });
+
     </script>
 {% endblock body %}
