@@ -33,3 +33,20 @@ function addRowTemplate(url, tableName, data) {
         }
     });
 }
+
+function updateRowTemplate(url, tableName, data) {
+    $.ajax(url, {
+        contentType: "application/json",
+        data: JSON.stringify({
+            'tableName': tableName,
+            'request': 'update',
+            'data': data
+        }),
+        type: 'POST',
+        success: function (data) {
+            let newDoc = document.open("text/html", "replace");
+            newDoc.write(data);
+            newDoc.close();
+        }
+    });
+}
