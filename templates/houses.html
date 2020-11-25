@@ -121,8 +121,9 @@
                 'newPoints': $('#editHousePointsInput').val(),
                 'houseID': rowInfo[5]
             };
+            // print out data to console to see if it's correct
             console.log(data)
-            updateHouse(data)
+            updateHouse(data) // this is where bugs happen :( 
             $('#editModal').modal('hide');
         });
 
