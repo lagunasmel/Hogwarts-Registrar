@@ -29,7 +29,11 @@
         </thead>
 
         {% for row in rows %}
-            <tr data-rowId="{{ row[id_col_name] }}" id="house{{ row[id_col_name] }}">
+            <tr data-rowId="{{ row[id_col_name] }}"
+                 {% if sqlEntityName == "Houses" %}
+                    id="house{{ row[id_col_name] }}"
+                {% endif %}
+            >
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
                 {% endfor %}
