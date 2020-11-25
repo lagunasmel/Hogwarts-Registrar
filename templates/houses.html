@@ -57,6 +57,10 @@
             addRowTemplate("{{ url_for('insert_row') }}", "Houses", data)
         }
 
+        function updateHouse(data) {
+            updateRowTemplate("{{ url_for('update_row') }}", "Houses", data)
+        }
+
         $('.delete-button').each((i, obj) => {
             console.log(obj.dataset.rowid)
             obj.addEventListener("click", (e) => {
