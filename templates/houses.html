@@ -79,14 +79,12 @@
             addHouse(data);
         });
 
-        let rowInfo = [] // global variable to keep track of current row info
-
         $('.edit-button').each((i, obj) => {
             obj.addEventListener("click", (e) => {
+                let rowInfo = [] // global variable to keep track of current row info
                 console.log('edit button clicked for house' + obj.dataset.rowid)
                 // grab the current table row data to fill the modal with
                 let $row = $('#' + 'house' + obj.dataset.rowid);
-                rowInfo = [] // reset the row info
                 // Grab the table data
                 let $tds = $row.find("td");
                 $.each($tds, function () {
@@ -108,6 +106,10 @@
                 houseAnimalInput.value = rowInfo[2]
                 houseColorsInput.value = rowInfo[3]
                 housePointsInput.value = rowInfo[4]
+
+                // Assign the houseID value to a hidden input field for later use
+                let houseIDInput = document.querySelector('#editHouseID')
+                houseIDInput.value = rowInfo[5]
             });
         });
 
@@ -119,7 +121,7 @@
                 'newAnimal': $('#editHouseAnimalInput').val(),
                 'newColors': $('#editHouseColorsInput').val(),
                 'newPoints': $('#editHousePointsInput').val(),
-                'houseID': rowInfo[5]
+                'houseID': $('#editHouseID').val()
             };
             // print out data to console to see if it's correct
             console.log(data)
