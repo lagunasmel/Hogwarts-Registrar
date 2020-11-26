@@ -296,7 +296,6 @@ def delete_row():
 @hogwarts.route('/_update-row', methods=['POST'])
 def update_row():
     request = req.get_json()
-    row_id = request['rowId']
     db = get_db()
     c = db.cursor(dictionary=True)
     if request['tableName'] == 'Houses':

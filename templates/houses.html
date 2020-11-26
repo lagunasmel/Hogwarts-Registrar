@@ -76,8 +76,58 @@
                 'colors': $('#houseColor').val(),
                 'points': $('#housePoints').val()
             };
-
             addHouse(data);
         });
+
+        $('.edit-button').each((i, obj) => {
+            obj.addEventListener("click", (e) => {
+                let rowInfo = [] // global variable to keep track of current row info
+                console.log('edit button clicked for house' + obj.dataset.rowid)
+                // grab the current table row data to fill the modal with
+                let $row = $('#' + 'house' + obj.dataset.rowid);
+                // Grab the table data
+                let $tds = $row.find("td");
+                $.each($tds, function () {
+                    rowInfo.push($(this).text());
+                });
+                rowInfo.splice(-1)
+                rowInfo.push(obj.dataset.rowid) // add row id to end of array
+
+                // Grab the current values in the row's td
+                let houseNameInput = document.querySelector('#editHouseNameInput')
+                let houseFounderInput = document.querySelector('#editHouseFounderNameInput')
+                let houseAnimalInput = document.querySelector('#editHouseAnimalInput')
+                let houseColorsInput = document.querySelector('#editHouseColorsInput')
+                let housePointsInput = document.querySelector('#editHousePointsInput')
+
+                // Assign these values to the modal
+                houseNameInput.value = rowInfo[0]
+                houseFounderInput.value = rowInfo[1]
+                houseAnimalInput.value = rowInfo[2]
+                houseColorsInput.value = rowInfo[3]
+                housePointsInput.value = rowInfo[4]
+
+                // Assign the houseID value to a hidden input field for later use
+                let houseIDInput = document.querySelector('#editHouseID')
+                houseIDInput.value = rowInfo[5]
+            });
+        });
+
+        // update button within the modal
+        $('#updateSubmit').on('click', (e) => {
+            let data = {
+                'newName': $('#editHouseNameInput').val(),
+                'newFounder': $('#editHouseFounderNameInput').val(),
+                'newAnimal': $('#editHouseAnimalInput').val(),
+                'newColors': $('#editHouseColorsInput').val(),
+                'newPoints': $('#editHousePointsInput').val(),
+                'houseID': $('#editHouseID').val()
+            };
+            // print out data to console to see if it's correct
+            console.log(data)
+            updateHouse(data) // this is where bugs happen :( 
+            $('#editModal').modal('hide');
+        });
+
     </script>
 {% endblock body %}
