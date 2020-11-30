@@ -12,8 +12,15 @@
             <label for="newName">Class Title</label>
             <br><input type="text" name="name" id="newName" class="form-control w-50">
 
-            <br><label for="classInstructor">Name of Class Instructor</label>
-            <br><input type="text" name="classInstructor" id="classInstructor" class="form-control w-50">
+            {#            <br><label for="classInstructor">Name of Class Instructor</label>#}
+            {#            <br><input type="text" name="classInstructor" id="classInstructor" class="form-control w-50">#}
+
+            <br><label for="classInstructor">Class Instructor</label>
+            <select class="form-control custom-select custom-select-sm w-25" id="classInstructor">
+                {% for instructor in data.instructornames %}
+                    <option value="{{ instructor[0] }}">{{ instructor[1] }}</option>
+                {% endfor %}
+            </select>
 
             <br><label for="classSize">Max Class Size</label>
             <input type="number" name="classSize" id="classSize" class="form-control w-25">

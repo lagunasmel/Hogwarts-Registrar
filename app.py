@@ -148,6 +148,10 @@ def classes():
         "rows": rows
     }
     data['table'] = table
+    c.execute("""SELECT instructorID, name FROM Instructors;""")
+    rows = c.fetchall()
+    instructornames = [(row['instructorID'], row['name']) for row in rows]
+    data['instructornames'] = instructornames
     return render_template('classes.html', data=data)
 
 
@@ -225,11 +229,12 @@ def insert_row():
     elif request['tableName'] == 'Classes':
         data = request['data']
         # First get the instructor's ID, assume it's the first one
-        c.execute("""SELECT instructorID FROM Instructors WHERE name = %s;""", (data['instructor'],))
-        rows = c.fetchall()
-        if len(rows) == 0:
-            return classes()
-        instructor_id = rows[0]['instructorID']
+        # c.execute("""SELECT instructorID FROM Instructors WHERE name = %s;""", (data['instructor'],))
+        # rows = c.fetchall()
+        # if len(rows) == 0:
+        #     return classes()
+        # instructor_id = rows[0]['instructorID']
+        instructor_id = data['instructor']
         c.execute("""INSERT INTO Classes(name, maxSize, description, instructorID)
                                         VALUES (%s, %s, %s, %s);""",
                   (data['name'], data['size'], data['description'], instructor_id))
