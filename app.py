@@ -277,7 +277,7 @@ def delete_row():
             c.execute("""DELETE
                             FROM Students
                             WHERE studentID = %s;""", (row_id,))
-        except:
+        except Exception:
             flash('This Student could not be deleted.'
                   ' Please remove Student from Enrollments prior to deletion attempts.')
 
@@ -287,7 +287,7 @@ def delete_row():
     elif request['tableName'] == 'Instructors':
         try:
             c.execute("""DELETE FROM Instructors WHERE instructorID = %s;""", (row_id,))
-        except:
+        except Exception:
             flash('This Instructor could not be deleted.'
                   ' Please remove Instructor from Classes prior to deletion attempts.')
 
