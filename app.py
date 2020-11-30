@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, flash
 from flask import request as req
 import os
 import urllib
@@ -17,6 +17,8 @@ mydb.close()
 """
 
 hogwarts = Flask(__name__)
+
+hogwarts.config['SECRET_KEY'] = 't62hMWeN4sV54A5e'
 
 
 # Auto-closes db connection at the end of each request
@@ -271,13 +273,24 @@ def delete_row():
     db = get_db()
     c = db.cursor(dictionary=True)
     if request['tableName'] == 'Students':
-        c.execute("""DELETE
-                        FROM Students
-                        WHERE studentID = %s;""", (row_id,))
+        try:
+            c.execute("""DELETE
+                            FROM Students
+                            WHERE studentID = %s;""", (row_id,))
+        except:
+            flash('This Student could not be deleted.'
+                  ' Please remove Student from Enrollments prior to deletion attempts.')
+
         db.commit()
         return students()
+
     elif request['tableName'] == 'Instructors':
-        c.execute("""DELETE FROM Instructors WHERE instructorID = %s;""", (row_id,))
+        try:
+            c.execute("""DELETE FROM Instructors WHERE instructorID = %s;""", (row_id,))
+        except:
+            flash('This Instructor could not be deleted.'
+                  ' Please remove Instructor from Classes prior to deletion attempts.')
+
         db.commit()
         return instructors()
     elif request['tableName'] == 'Classes':
