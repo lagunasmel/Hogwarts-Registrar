@@ -202,6 +202,10 @@ def enrollments():
         "rows": rows
     }
     data['table'] = table
+    c.execute("""SELECT classID, name FROM Classes;""")
+    rows = c.fetchall()
+    classnames = [(row['classID'], row['name']) for row in rows]
+    data['classnames'] = classnames
     return render_template('enrollments.html', data=data)
 
 
@@ -228,12 +232,6 @@ def insert_row():
         return instructors()
     elif request['tableName'] == 'Classes':
         data = request['data']
-        # First get the instructor's ID, assume it's the first one
-        # c.execute("""SELECT instructorID FROM Instructors WHERE name = %s;""", (data['instructor'],))
-        # rows = c.fetchall()
-        # if len(rows) == 0:
-        #     return classes()
-        # instructor_id = rows[0]['instructorID']
         instructor_id = data['instructor']
         c.execute("""INSERT INTO Classes(name, maxSize, description, instructorID)
                                         VALUES (%s, %s, %s, %s);""",
@@ -252,12 +250,10 @@ def insert_row():
         # First get the student and class IDs
         c.execute("""SELECT studentID FROM Students WHERE name = %s;""", (data['name'],))
         student_rows = c.fetchall()
-        c.execute("""SELECT classID FROM Classes WHERE name = %s;""", (data['class'],))
-        class_rows = c.fetchall()
-        if len(student_rows) == 0 or len(class_rows) == 0:
+        if len(student_rows) == 0:
             return enrollments()
         student_id = student_rows[0]['studentID']
-        class_id = class_rows[0]['classID']
+        class_id = data['class']
         # Clean the other data
         if data['rating'] == "":
             data['rating'] = None

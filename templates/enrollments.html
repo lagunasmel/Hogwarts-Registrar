@@ -14,8 +14,12 @@
             <label for="studentID">Student Name (Full Name, i.e. 'Harry Potter')</label>
             <br><input type="text" name="studentID" id="studentID" class="form-control w-50" min="1">
 
-            <label for="classID">Class Name (i.e. 'Potions')</label>
-            <input type="text" name="classID" id="classID" class="form-control w-50" min="1">
+            <br><label for="classID">Choose the Class</label>
+            <select class="form-control custom-select custom-select-sm w-25" id="classID">
+                {% for class in data.classnames %}
+                    <option value="{{ class[0] }}">{{ class[1] }}</option>
+                {% endfor %}
+            </select>
 
 
             <fieldset class="form-group">
