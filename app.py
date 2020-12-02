@@ -208,6 +208,10 @@ def enrollments():
     rows = c.fetchall()
     classnames = [(row['classID'], row['name']) for row in rows]
     data['classnames'] = classnames
+    c.execute("""SELECT studentID, name FROM Students;""")
+    rows = c.fetchall()
+    studentnames = [(row['studentID'], row['name']) for row in rows]
+    data['studentnames'] = studentnames
     return render_template('enrollments.html', data=data)
 
 
@@ -250,11 +254,7 @@ def insert_row():
     elif request['tableName'] == 'StudentClassEnrollments':
         data = request['data']
         # First get the student and class IDs
-        c.execute("""SELECT studentID FROM Students WHERE name = %s;""", (data['name'],))
-        student_rows = c.fetchall()
-        if len(student_rows) == 0:
-            return enrollments()
-        student_id = student_rows[0]['studentID']
+        student_id = data['student']
         class_id = data['class']
         # Clean the other data
         if data['rating'] == "":
@@ -294,7 +294,11 @@ def delete_row():
         db.commit()
         return instructors()
     elif request['tableName'] == 'Classes':
-        c.execute("""DELETE FROM Classes WHERE classID = %s;""", (row_id,))
+        try:
+            c.execute("""DELETE FROM Classes WHERE classID = %s;""", (row_id,))
+        except Exception:
+            flash('This Class could not be deleted.'
+                  ' Please remove Class from Enrollments prior to deletion attempts.')
         db.commit()
         return classes()
     elif request['tableName'] == 'Houses':
@@ -320,6 +324,14 @@ def update_row():
             data['houseID']))
         db.commit()
         return houses()
+    elif request['tableName'] == 'Instructors':
+        data = request['data']
+        c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s
+                WHERE instructorID=%s;""", (
+            data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+            data['instructorID']))
+        db.commit()
+        return instructors()
 
 
 if __name__ == '__main__':

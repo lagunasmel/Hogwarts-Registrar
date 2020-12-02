@@ -11,8 +11,12 @@
             enroll students currently attending Hogwarts.</p>
         <div class="form-group">
 
-            <label for="studentID">Student Name (Full Name, i.e. 'Harry Potter')</label>
-            <br><input type="text" name="studentID" id="studentID" class="form-control w-50" min="1">
+            <br><label for="studentID">Choose the Student</label>
+            <select class="form-control custom-select custom-select-sm w-25" id="studentID">
+                {% for student in data.studentnames %}
+                    <option value="{{ student[0] }}">{{ student[1] }}</option>
+                {% endfor %}
+            </select>
 
             <br><label for="classID">Choose the Class</label>
             <select class="form-control custom-select custom-select-sm w-25" id="classID">
@@ -75,7 +79,7 @@
 
         $('#enrollmentSubmit').on('click', (e) => {
             let data = {
-                'name': $('#studentID').val(),
+                'student': $('#studentID').val(),
                 'class': $('#classID').val(),
                 'finished': $('#finished').is(':checked'),
                 'rating': $('#rating').val(),

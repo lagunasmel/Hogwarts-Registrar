@@ -57,7 +57,7 @@ CREATE TABLE StudentClassEnrollments
     year         INT(11)                NOT NULL,
     term         INT(11),
     PRIMARY KEY (enrollmentID),
-    FOREIGN KEY (studentID) REFERENCES Students (studentID),
+    FOREIGN KEY (studentID) REFERENCES Students (studentID) ON DELETE CASCADE,
     FOREIGN KEY (classID) REFERENCES Classes (classID)
 );
 
