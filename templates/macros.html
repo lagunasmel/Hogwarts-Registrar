@@ -21,7 +21,7 @@
                 <th scope="col">{{ header }}</th>
             {% endfor %}
 
-            {% if sqlEntityName == "Houses" %}
+            {% if sqlEntityName == "Houses" or sqlEntityName == "Instructors" %}
                 <th>Edit Data</th>
             {% endif %}
             {% if sqlEntityName != "Houses" %}
@@ -32,9 +32,11 @@
 
         {% for row in rows %}
             <tr data-rowId="{{ row[id_col_name] }}"
-                    {% if sqlEntityName == "Houses" %}
+               {% if sqlEntityName == "Houses" %}
                 id="house{{ row[id_col_name] }}"
-                    {% endif %}
+                {% elif sqlEntityName == "Instructors" %}
+                id="instructor{{ row[id_col_name] }}"
+                {% endif %}
             >
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
@@ -47,6 +49,18 @@
                         <i class="far fa-edit"></i>
                     </button>
                 </td>
+                {% elif sqlEntityName == "Instructors" %}
+                    <td>
+                    <button class="edit-button btn btn-info" data-rowid="{{ row[id_col_name] }}"
+                            data-toggle="modal" data-target="#editModal">
+                        <i class="far fa-edit"></i>
+                    </button>
+                    </td>
+                    <td>
+                        <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
                 {% else %}
                     <td>
                         <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
@@ -108,6 +122,7 @@
                 </div>
             </div>
         </div>
+
 
     {% endif %}
 

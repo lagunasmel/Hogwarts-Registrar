@@ -37,6 +37,56 @@
 
     </div>
 
+
+    <!-- Edit Instructors Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Instructor Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editInstructorForm">
+
+                        <label for="editInstructorNameInput">Instructor Name</label><br>
+                        <input type="text" id="editInstructorNameInput" name="editInstructorName" class="form-control">
+
+                        <p><br><label for="editInstructorHouseNameInput">House Name (can be set to None)</label><br>
+                            <select class="form-control custom-select custom-select-sm w-25" id="editInstructorHouseNameInput">
+                                {% for house in data.housenames %}
+                                    <option id="{{ house[0] }}" value="{{ house[1] }}">{{ house[1] }}</option>
+                                {% endfor %}
+                                <option value="0">(None)</option>
+                            </select>
+
+                        <p><label for="editPatronusInput">Patronus</label><Br>
+                            <input type="text" id="editPatronusInput" name="editPatronus"
+                                   class="form-control"></p>
+
+                        <p><label for="editWandTypeInput">Wand type</label><br>
+                            <input type="text" id="editWandTypeInput" name="editWandType"
+                                   class="form-control"></p>
+
+                        <p>
+                            <input type="hidden" id="editInstructorID" name="editInstructorID" class="form-control"
+                                   min="0">
+                        </p>
+
+                    </form>
+                </div>
+                <!-- Buttons at bottom of modal -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="updateSubmit">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript" src="{{ url_for('static', filename='js/client.js') }}">
     </script>
 
@@ -47,6 +97,10 @@
 
         function addInstructor(data) {
             addRowTemplate("{{ url_for('insert_row') }}", "Instructors", data)
+        }
+
+        function updateInstructor(data) {
+            updateRowTemplate("{{ url_for('update_row') }}", "Instructors", data)
         }
 
         $('.delete-button').each((i, obj) => {
@@ -63,8 +117,56 @@
                 'patronus': $('#newPatronus').val(),
                 'wandType': $('#newWandType').val(),
             };
-
             addInstructor(data);
+        });
+
+
+        $('.edit-button').each((i, obj) => {
+            obj.addEventListener("click", (e) => {
+                let rowInfo = [] // global variable to keep track of current row info
+                console.log('edit button clicked for instructor' + obj.dataset.rowid)
+                // grab the current table row data to fill the modal with
+                let $row = $('#' + 'instructor' + obj.dataset.rowid);
+                // Grab the table data
+                let $tds = $row.find("td");
+                $.each($tds, function () {
+                    rowInfo.push($(this).text());
+                });
+                rowInfo.splice(-2) // remove the text from edit and delete buttons
+                rowInfo.push(obj.dataset.rowid) // add row id to end of array
+                console.log(rowInfo)
+
+                // Grab the current values in the row's td
+                let instructorNameInput = document.querySelector('#editInstructorNameInput')
+                let houseNameInput = document.getElementById('editInstructorHouseNameInput')
+                let patronusInput = document.querySelector('#editPatronusInput')
+                let wandTypeInput = document.querySelector('#editWandTypeInput')
+
+                // Assign these values to the modal
+                instructorNameInput.value = rowInfo[0]
+                houseNameInput.value = rowInfo[1]
+                patronusInput.value = rowInfo[2]
+                wandTypeInput.value = rowInfo[3]
+                // Hidden input to retrieve instructor ID
+                let instructorIDInput = document.querySelector('#editInstructorID')
+                instructorIDInput.value = rowInfo[4]
+            });
+        });
+
+
+        $('#updateSubmit').on('click', (e) => {
+            let data = {
+                'newName': $('#editInstructorNameInput').val(),
+                'newPatronus': $('#editPatronusInput').val(),
+                'newWandType': $('#editWandTypeInput').val(),
+                'newHouseID': $('#editInstructorHouseNameInput').val(),
+                'instructorID': $('#editInstructorID').val()
+            };
+            // print out data to console to check for accuracy
+            console.log(data)
+            // update Instructor function should be called here
+            updateInstructor(data)
+            $('#editModal').modal('hide');
         });
     </script>
 
