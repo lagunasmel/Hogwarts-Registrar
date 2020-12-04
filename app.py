@@ -111,7 +111,7 @@ def instructors():
     c.execute(
         """SELECT i.instructorID, i.name instructorName, h.name houseName, i.patronus, i.wandType
             FROM Instructors AS i
-            INNER JOIN Houses AS h on i.houseID = h.houseID;""")
+            LEFT JOIN Houses AS h on i.houseID = h.houseID;""")
     rows = c.fetchall()
 
     table = {
