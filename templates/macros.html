@@ -21,7 +21,7 @@
                 <th scope="col">{{ header }}</th>
             {% endfor %}
 
-            {% if sqlEntityName == "Houses" %}
+            {% if sqlEntityName == "Houses" or sqlEntityName == "Instructors" %}
                 <th>Edit Data</th>
             {% endif %}
             {% if sqlEntityName != "Houses" %}
@@ -32,9 +32,11 @@
 
         {% for row in rows %}
             <tr data-rowId="{{ row[id_col_name] }}"
-                    {% if sqlEntityName == "Houses" %}
+               {% if sqlEntityName == "Houses" %}
                 id="house{{ row[id_col_name] }}"
-                    {% endif %}
+                {% elif sqlEntityName == "Instructors" %}
+                id="instructor{{ row[id_col_name] }}"
+                {% endif %}
             >
                 {% for col_name in columns %}
                     <td>{{ row[col_name] }}</td>
@@ -47,6 +49,18 @@
                         <i class="far fa-edit"></i>
                     </button>
                 </td>
+                {% elif sqlEntityName == "Instructors" %}
+                    <td>
+                    <button class="edit-button btn btn-info" data-rowid="{{ row[id_col_name] }}"
+                            data-toggle="modal" data-target="#editModal">
+                        <i class="far fa-edit"></i>
+                    </button>
+                    </td>
+                    <td>
+                        <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>
                 {% else %}
                     <td>
                         <button class="delete-button btn btn-danger" data-rowId="{{ row[id_col_name] }}">
@@ -97,6 +111,51 @@
                                 <input type="hidden" id="editHouseID" name="editHouseID" class="form-control"
                                        min="0"></p>
 
+
+                        </form>
+                    </div>
+                    <!-- Buttons at bottom of modal -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="updateSubmit">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% elif sqlEntityName == "Instructors" %}
+       <!-- Edit Instructors Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Instructor Info</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editInstructorForm">
+
+                            <label for="editInstructorNameInput">Instructor Name</label><br>
+                            <input type="text" id="editInstructorNameInput" name="editInstructorName" class="form-control">
+
+                            <p><label for="editInstructorHouseNameInput">House Name (Can be left blank)</label><br>
+                                <input type="text" id="editInstructorHouseNameInput" name="editInstructorHouseName"
+                                       class="form-control"></p>
+
+                            <p><label for="editPatronusInput">Patronus</label><Br>
+                                <input type="text" id="editPatronusInput" name="editPatronus"
+                                       class="form-control"></p>
+
+                            <p><label for="editHouseColorsInput">Wand type</label><br>
+                                <input type="text" id="editWandTypeInput" name="editWandType"
+                                       class="form-control"></p>
+
+                            <p>
+                                <input type="hidden" id="editInstructor" name="editInstructorID" class="form-control"
+                                       min="0"></p>
 
                         </form>
                     </div>

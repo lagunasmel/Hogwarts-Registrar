@@ -63,8 +63,42 @@
                 'patronus': $('#newPatronus').val(),
                 'wandType': $('#newWandType').val(),
             };
-
             addInstructor(data);
+            });
+
+
+        $('.edit-button').each((i, obj) => {
+            obj.addEventListener("click", (e) => {
+                let rowInfo = [] // global variable to keep track of current row info
+                console.log('edit button clicked for instructor' + obj.dataset.rowid)
+                // grab the current table row data to fill the modal with
+                let $row = $('#' + 'instructor' + obj.dataset.rowid);
+                // Grab the table data
+                let $tds = $row.find("td");
+                $.each($tds, function () {
+                    rowInfo.push($(this).text());
+                });
+                rowInfo.splice(-2) // remove the text from edit and delete buttons
+                rowInfo.push(obj.dataset.rowid) // add row id to end of array
+                console.log(rowInfo)
+
+                // Grab the current values in the row's td
+                let instructorNameInput = document.querySelector('#editInstructorNameInput')
+                let houseNameInput = document.querySelector('#editInstructorHouseNameInput')
+                let patronusInput = document.querySelector('#editPatronusInput')
+                let wandTypeInput = document.querySelector('#editWandTypeInput')
+
+                // Assign these values to the modal
+                instructorNameInput.value = rowInfo[0]
+                houseNameInput.value = rowInfo[1]
+                patronusInput.value = rowInfo[2]
+                wandTypeInput.value = rowInfo[3]
+
+
+                // Assign the houseID value to a hidden input field for later use
+                {#let houseIDInput = document.querySelector('#editHouseID')#}
+                {#houseIDInput.value = rowInfo[5]#}
+            });
         });
     </script>
 
