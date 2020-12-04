@@ -326,10 +326,18 @@ def update_row():
         return houses()
     elif request['tableName'] == 'Instructors':
         data = request['data']
-        c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s
-                WHERE instructorID=%s;""", (
-            data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
-            data['instructorID']))
+
+        if data['newHouseID'] == 0:
+            c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s 
+                                WHERE instructorID=%s;""", (
+                data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+                data['instructorID']))
+        else:
+            c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, 
+                                houseID=(SELECT houseID FROM Houses WHERE name=%s) 
+                        WHERE instructorID=%s;""", (
+                data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+                data['instructorID']))
         db.commit()
         return instructors()
 
