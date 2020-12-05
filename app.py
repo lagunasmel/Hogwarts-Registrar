@@ -314,10 +314,13 @@ def delete_row():
 @hogwarts.route('/_update-row', methods=['POST'])
 def update_row():
     request = req.get_json()
+    data = request['data']
+    for key in data:
+        if data[key] == '':
+            data[key] = None
     db = get_db()
     c = db.cursor(dictionary=True)
     if request['tableName'] == 'Houses':
-        data = request['data']
         c.execute("""UPDATE Houses SET name=%s, founder=%s, animal=%s, colors=%s, points=%s
         WHERE houseID=%s;""", (
             data['newName'], data['newFounder'], data['newAnimal'], data['newColors'], data['newPoints'],
@@ -325,8 +328,6 @@ def update_row():
         db.commit()
         return houses()
     elif request['tableName'] == 'Instructors':
-        data = request['data']
-
         if data['newHouseID'] == 0:
             c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s 
                                 WHERE instructorID=%s;""", (
