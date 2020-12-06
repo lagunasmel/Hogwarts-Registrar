@@ -321,24 +321,36 @@ def update_row():
     db = get_db()
     c = db.cursor(dictionary=True)
     if request['tableName'] == 'Houses':
-        c.execute("""UPDATE Houses SET name=%s, founder=%s, animal=%s, colors=%s, points=%s
-        WHERE houseID=%s;""", (
-            data['newName'], data['newFounder'], data['newAnimal'], data['newColors'], data['newPoints'],
-            data['houseID']))
+        try:
+            c.execute("""UPDATE Houses SET name=%s, founder=%s, animal=%s, colors=%s, points=%s
+            WHERE houseID=%s;""", (
+                data['newName'], data['newFounder'], data['newAnimal'], data['newColors'], data['newPoints'],
+                data['houseID']))
+        except Exception:
+            flash('Oops! We could not update the row. Please make sure the required sections are '
+                  'filled in.')
         db.commit()
         return houses()
     elif request['tableName'] == 'Instructors':
         if data['newHouseID'] == 0:
-            c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s 
+            try:
+                c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s 
                                 WHERE instructorID=%s;""", (
-                data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
-                data['instructorID']))
+                        data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+                        data['instructorID']))
+            except Exception:
+                flash('Oops! We could not update the row. Please make sure the required sections are '
+                      'filled in.')
         else:
-            c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, 
-                                houseID=(SELECT houseID FROM Houses WHERE name=%s) 
-                        WHERE instructorID=%s;""", (
-                data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
-                data['instructorID']))
+            try:
+                c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, 
+                                    houseID=(SELECT houseID FROM Houses WHERE name=%s) 
+                            WHERE instructorID=%s;""", (
+                    data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+                    data['instructorID']))
+            except Exception:
+                flash('Oops! We could not update the row. Please make sure the required sections are '
+                      'filled in.')
         db.commit()
         return instructors()
 

@@ -8,7 +8,7 @@
         <h3>Add An Instructor</h3>
 
         <div class="form-group">
-            <label for="newName">Name of Instructor</label>
+            <label for="newName">Name of Instructor</label> <span class="text-secondary"> <small>*required</small></span>
             <input type="text" name="name" id="newName" class="form-control w-50">
 
             <br><label for="newHouseName">Assigned House </label>
@@ -52,7 +52,8 @@
                 <div class="modal-body">
                     <form id="editInstructorForm">
 
-                        <label for="editInstructorNameInput">Instructor Name</label><br>
+                        <label for="editInstructorNameInput">Instructor Name</label><span class="text-secondary">
+                        <small>*required</small></span><br>
                         <input type="text" id="editInstructorNameInput" name="editInstructorName" class="form-control">
 
                         <p><br><label for="editInstructorHouseNameInput">House Name (can be set to None)</label><br>
