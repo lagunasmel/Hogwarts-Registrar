@@ -9,7 +9,7 @@
         <h3>Add A Class</h3>
 
         <div class="form-group">
-            <label for="newName">Class Title</label>
+            <label for="newName">Class Title</label> <span class="text-secondary"><small>*required</small></span>
             <br><input type="text" name="name" id="newName" class="form-control w-50">
 
             <br><label for="classInstructor">Class Instructor</label>
@@ -19,7 +19,7 @@
                 {% endfor %}
             </select>
 
-            <br><label for="classSize">Max Class Size</label>
+            <br><label for="classSize">Max Class Size</label> <span class="text-secondary"><small> *required</small></span>
             <input type="number" name="classSize" id="classSize" class="form-control w-25">
 
             <br><label for="classDescription">Brief Course Description</label>

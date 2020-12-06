@@ -18,19 +18,19 @@
         <h3>Add A House</h3>
 
         <div class="form-group">
-            <label for="newHouseName">Name of House</label>
+            <label for="newHouseName">Name of House</label> <span class="text-secondary"><small>*required</small></span>
             <br><input type="text" name="houseName" id="newHouseName" class="form-control w-50">
 
-            <br><label for="newHouseFounder">House Founder</label>
+            <br><label for="newHouseFounder">House Founder</label> <span class="text-secondary"><small>*required</small></span>
             <br><input type="text" name="houseFounder" id="newHouseFounder" class="form-control w-50">
 
-            <br><label for="houseAnimal">House Mascot/Animal</label>
+            <br><label for="houseAnimal">House Mascot/Animal</label> <span class="text-secondary"><small>*required</small></span>
             <br><input type="text" name="houseAnimal" id="houseAnimal" class="form-control w-50">
 
-            <br><label for="houseColor">House Colors</label>
+            <br><label for="houseColor">House Colors</label> <span class="text-secondary"><small>*required</small></span>
             <br><input type="text" name="houseColor" id="houseColor" class="form-control w-50">
 
-            <br><label for="housePoints">House Points</label>
+            <br><label for="housePoints">House Points</label> <span class="text-secondary"><small> * defaults to zero</small></span>
             <br><input type="number" name="housePoints" id="housePoints" class="form-control w-25" min="0">
 
             <br><input type="button" value="Add House" name="Add House" id="addHouseSubmit" class="btn btn-primary">
@@ -59,19 +59,23 @@
                 <div class="modal-body">
                     <form id="editHouseForm">
 
-                        <label for="editHouseNameInput">House Name</label><br>
-                        <input type="text" id="editHouseNameInput" name="editHouseName" class="form-control">
+                        <label for="editHouseNameInput">House Name</label>
+                            <span class="text-secondary"><small> *required</small></span>
+                        <br><input type="text" id="editHouseNameInput" name="editHouseName" class="form-control">
 
-                        <p><label for="editHouseFounderNameInput">Founder Name</label><br>
-                            <input type="text" id="editHouseFounderNameInput" name="editHouseFounderName"
+                        <p><label for="editHouseFounderNameInput">Founder Name</label>
+                                <span class="text-secondary"><small> *required</small></span>
+                            <br><input type="text" id="editHouseFounderNameInput" name="editHouseFounderName"
                                    class="form-control"></p>
 
-                        <p><label for="editHouseAnimalInput">House Animal</label><Br>
-                            <input type="text" id="editHouseAnimalInput" name="editHouseAnimal"
+                        <p><label for="editHouseAnimalInput">House Animal</label>
+                                <span class="text-secondary"><small> *required</small></span>
+                            <br><input type="text" id="editHouseAnimalInput" name="editHouseAnimal"
                                    class="form-control"></p>
 
-                        <p><label for="editHouseColorsInput">House Colors</label><br>
-                            <input type="text" id="editHouseColorsInput" name="editHouseColors"
+                        <p><label for="editHouseColorsInput">House Colors</label>
+                                <span class="text-secondary"><small> *required</small></span>
+                            <br><input type="text" id="editHouseColorsInput" name="editHouseColors"
                                    class="form-control"></p>
 
                         <p><label for="editHousePointsInput">Points</label><br>
