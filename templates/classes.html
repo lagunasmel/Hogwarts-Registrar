@@ -10,7 +10,7 @@
 
         <div class="form-group">
             <label for="newName">Class Title</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="text" name="name" id="newName" class="form-control w-50">
+            <br><input type="text" name="name" id="newName" class="form-control w-50" required>
 
             <br><label for="classInstructor">Class Instructor</label>
             <select class="form-control custom-select custom-select-sm w-25" id="classInstructor">
@@ -19,8 +19,8 @@
                 {% endfor %}
             </select>
 
-            <br><label for="classSize">Max Class Size</label> <span class="text-secondary"><small> *required</small></span>
-            <input type="number" name="classSize" id="classSize" class="form-control w-25">
+            <br><label for="classSize">Max Class Size</label> <span class="text-secondary"><small> *required, minimum 1</small></span>
+            <input type="number" name="classSize" id="classSize" class="form-control w-25" min="1" value="1">
 
             <br><label for="classDescription">Brief Course Description</label>
             <input type="text" name="classDescription" id="classDescription" class="form-control w-75">
@@ -56,14 +56,22 @@
         });
 
         $('#addClassSubmit').on('click', (e) => {
-            let data = {
+
+            const isNewNameValid = newName.checkValidity();
+            const isMaxSizeValid = classSize.checkValidity()
+
+            if (isNewNameValid && isMaxSizeValid) {
+                let data = {
                 'name': $('#newName').val(),
                 'instructor': $('#classInstructor').val(),
                 'size': $('#classSize').val(),
                 'description': $('#classDescription').val(),
-            };
+                };
+                addClass(data);
+            } else {
+                alert('Please fill out all required fields with valid data.')
+            }
 
-            addClass(data);
         });
     </script>
 {% endblock body %}

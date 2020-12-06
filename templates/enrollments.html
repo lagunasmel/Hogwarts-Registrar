@@ -11,14 +11,14 @@
             enroll students currently attending Hogwarts.</p>
         <div class="form-group">
 
-            <br><label for="studentID">Choose the Student</label>
+            <br><label for="studentID">Choose the Student </label>
             <select class="form-control custom-select custom-select-sm w-25" id="studentID">
                 {% for student in data.studentnames %}
                     <option value="{{ student[0] }}">{{ student[1] }}</option>
                 {% endfor %}
             </select>
 
-            <br><label for="classID">Choose the Class</label>
+            <br><label for="classID">Choose the Class </label>
             <select class="form-control custom-select custom-select-sm w-25" id="classID">
                 {% for class in data.classnames %}
                     <option value="{{ class[0] }}">{{ class[1] }}</option>
@@ -40,7 +40,8 @@
                        class="form-control w-25">
 
             <br><label for="year">Student Year (1 to 7)</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="number" min="1" max="7" name="year" id="year" placeholder="Year" class="form-control w-25">
+            <br><input type="number" min="1" max="7" name="year" id="year" placeholder="Year" class="form-control w-25"
+                value="0" required>
 
             <br><label for="term">Term Enrolled</label>
             <br><input type="number" min="1" max="3" name="term" id="term" class="form-control w-25" placeholder="Term">
@@ -78,16 +79,21 @@
         });
 
         $('#enrollmentSubmit').on('click', (e) => {
-            let data = {
+            const isValidStudentYear = year.checkValidity()
+
+            if (isValidStudentYear) {
+                let data = {
                 'student': $('#studentID').val(),
                 'class': $('#classID').val(),
                 'finished': $('#finished').is(':checked'),
                 'rating': $('#rating').val(),
                 'year': $('#year').val(),
                 'term': $('#term').val()
-            };
-
-            addEnrollment(data);
+                };
+                addEnrollment(data);
+            } else {
+                alert('Please enter a valid student year from 1 to 7.')
+            }
         });
     </script>
 {% endblock body %}

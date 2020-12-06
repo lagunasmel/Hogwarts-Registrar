@@ -19,19 +19,19 @@
 
         <div class="form-group">
             <label for="newHouseName">Name of House</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="text" name="houseName" id="newHouseName" class="form-control w-50">
+            <br><input type="text" name="houseName" id="newHouseName" class="form-control w-50" required>
 
             <br><label for="newHouseFounder">House Founder</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="text" name="houseFounder" id="newHouseFounder" class="form-control w-50">
+            <br><input type="text" name="houseFounder" id="newHouseFounder" class="form-control w-50" required>
 
             <br><label for="houseAnimal">House Mascot/Animal</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="text" name="houseAnimal" id="houseAnimal" class="form-control w-50">
+            <br><input type="text" name="houseAnimal" id="houseAnimal" class="form-control w-50" required>
 
             <br><label for="houseColor">House Colors</label> <span class="text-secondary"><small>*required</small></span>
-            <br><input type="text" name="houseColor" id="houseColor" class="form-control w-50">
+            <br><input type="text" name="houseColor" id="houseColor" class="form-control w-50" required>
 
-            <br><label for="housePoints">House Points</label> <span class="text-secondary"><small> * defaults to zero</small></span>
-            <br><input type="number" name="housePoints" id="housePoints" class="form-control w-25" min="0">
+            <br><label for="housePoints">House Points</label>
+            <br><input type="number" name="housePoints" id="housePoints" class="form-control w-25" value="0">
 
             <br><input type="button" value="Add House" name="Add House" id="addHouseSubmit" class="btn btn-primary">
 
@@ -125,14 +125,24 @@
         });
 
         $('#addHouseSubmit').on('click', (e) => {
-            let data = {
-                'name': $('#newHouseName').val(),
-                'founder': $('#newHouseFounder').val(),
-                'animal': $('#houseAnimal').val(),
-                'colors': $('#houseColor').val(),
-                'points': $('#housePoints').val()
-            };
-            addHouse(data);
+
+            const isHouseNameValid = newHouseName.checkValidity()
+            const isHouseFounderValid = newHouseFounder.checkValidity()
+            const isHouseColorValid = houseColor.checkValidity()
+            const isHouseAnimalValid = houseAnimal.checkValidity()
+
+            if (isHouseNameValid && isHouseFounderValid && isHouseColorValid && isHouseAnimalValid) {
+                let data = {
+                    'name': $('#newHouseName').val(),
+                    'founder': $('#newHouseFounder').val(),
+                    'animal': $('#houseAnimal').val(),
+                    'colors': $('#houseColor').val(),
+                    'points': $('#housePoints').val()
+                    };
+                addHouse(data);
+            } else {
+                alert('Please fill out all required fields with valid data. ')
+            }
         });
 
         $('.edit-button').each((i, obj) => {
