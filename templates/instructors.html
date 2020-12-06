@@ -9,7 +9,7 @@
 
         <div class="form-group">
             <label for="newName">Name of Instructor</label> <span class="text-secondary"> <small>*required</small></span>
-            <input type="text" name="name" id="newName" class="form-control w-50">
+            <input type="text" name="name" id="newName" class="form-control w-50" required>
 
             <br><label for="newHouseName">Assigned House </label>
             <select class="form-control custom-select custom-select-sm w-25" id="newHouseName">
@@ -112,13 +112,19 @@
         });
 
         $('#addInstructorSubmit').on('click', (e) => {
-            let data = {
+            const isNewNameValid = newName.checkValidity();
+            if (isNewNameValid) {
+                let data = {
                 'name': $('#newName').val(),
                 'houseID': $('#newHouseName').val(),
                 'patronus': $('#newPatronus').val(),
                 'wandType': $('#newWandType').val(),
-            };
-            addInstructor(data);
+                };
+                addInstructor(data);
+            } else {
+                alert('Please enter a name for the Instructor.')
+            }
+
         });
 
 

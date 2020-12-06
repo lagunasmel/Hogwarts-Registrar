@@ -8,7 +8,7 @@
         <h3>Add a Student</h3>
         <div class="form-group">
             <label for="newName">Name of Student</label><span class="text-secondary"><small> *required</small></span>
-            <input type="text" name="name" id="newName" class="form-control w-50">
+            <input type="text" name="name" id="newName" class="form-control w-50" required>
 
             <br><label for="newHouseName">Assigned House </label>
             <select class="form-control custom-select custom-select-sm w-25" id="newHouseName">
@@ -76,16 +76,23 @@
         });
 
         $('#addStudentSubmit').on('click', (e) => {
-            let data = {
-                'name': $('#newName').val(),
-                'houseID': $('#newHouseName').val(),
-                'year': $('#newYear').val(),
-                'patronus': $('#newPatronus').val(),
-                'wandType': $('#newWandType').val(),
-                'prefect': $('#newPrefect').is(':checked')
-            };
+            const isNewNameValid = newName.checkValidity();
+            const isYearValid = newYear.checkValidity();
 
-            addStudent(data);
+            if (isNewNameValid && isYearValid) {
+                let data = {
+                    'name': $('#newName').val(),
+                    'houseID': $('#newHouseName').val(),
+                    'year': $('#newYear').val(),
+                    'patronus': $('#newPatronus').val(),
+                    'wandType': $('#newWandType').val(),
+                    'prefect': $('#newPrefect').is(':checked')
+                };
+                addStudent(data);
+            } else {
+                alert('Please ensure you have filled out all required fields and that ' +
+                    'the Student year is between 1 and 7.')
+            }
         });
 
         $('#searchStudentSubmit').on('click', (e) => {
