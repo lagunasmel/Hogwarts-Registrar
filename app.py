@@ -220,15 +220,17 @@ def insert_row():
     request = req.get_json()
     db = get_db()
     c = db.cursor(dictionary=True)
+    data = request['data']
+    for key in data:
+        if data[key] == '':
+            data[key] = None
     if request['tableName'] == 'Students':
-        data = request['data']
         c.execute("""INSERT INTO Students(name, year, patronus, wandType, prefect, houseID)
                         VALUES (%s, %s, %s, %s, %s, %s);""",
                   (data['name'], data['year'], data['patronus'], data['wandType'], data['prefect'], data['houseID']))
         db.commit()
         return students()
     elif request['tableName'] == 'Instructors':
-        data = request['data']
         if data['houseID'] == '0':
             data['houseID'] = None
         c.execute("""INSERT INTO Instructors(name, patronus, wandType, houseID)
@@ -237,7 +239,6 @@ def insert_row():
         db.commit()
         return instructors()
     elif request['tableName'] == 'Classes':
-        data = request['data']
         instructor_id = data['instructor']
         c.execute("""INSERT INTO Classes(name, maxSize, description, instructorID)
                                         VALUES (%s, %s, %s, %s);""",
@@ -245,14 +246,12 @@ def insert_row():
         db.commit()
         return classes()
     elif request['tableName'] == 'Houses':
-        data = request['data']
         c.execute("""INSERT INTO Houses(name, founder, animal, colors, points)
                                         VALUES (%s, %s, %s, %s, %s);""",
                   (data['name'], data['founder'], data['animal'], data['colors'], data['points']))
         db.commit()
         return houses()
     elif request['tableName'] == 'StudentClassEnrollments':
-        data = request['data']
         # First get the student and class IDs
         student_id = data['student']
         class_id = data['class']
@@ -336,8 +335,8 @@ def update_row():
             try:
                 c.execute("""UPDATE Instructors SET name=%s, patronus=%s, wandType=%s, houseID=%s 
                                 WHERE instructorID=%s;""", (
-                        data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
-                        data['instructorID']))
+                    data['newName'], data['newPatronus'], data['newWandType'], data['newHouseID'],
+                    data['instructorID']))
             except Exception:
                 flash('Oops! We could not update the row. Please make sure the required sections are '
                       'filled in.')
