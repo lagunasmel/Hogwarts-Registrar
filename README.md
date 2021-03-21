@@ -13,7 +13,7 @@ It was developed by Melissa Lagunas and Nishant Tharani in the Fall of 2020 for 
 The following functionality is implemented:
 
 - [X] User can add entries to the following tables: Students, Instructors, Classes, Houses, and Enrollments. 
-- [X]  User can delete entries from the following tables: Students, Instructors, Classes, and Enrollments. (Houses excluded, because Hogwarts Houses will always exist. :))
+- [X]  User can delete entries from the following tables: Students, Instructors, Classes, and Enrollments. (Houses excluded, because Hogwarts Houses will always exist. 😃)
 - [X] User can update entries from the following tables: Houses, Instructors
 - [X] Website has an intersection table: Enrollments, where students can be 'enrolled' in a class. 
 
