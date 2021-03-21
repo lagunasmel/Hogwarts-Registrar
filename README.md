@@ -1,7 +1,7 @@
 # Hogwarts Registrar
 
 **Hogwarts Registrar** is a web app that showcases relational databases and allows the user to add, delete, and update data in the system. 
-It utilizes many to many relationships and many to one relationships to generate data in the system.
+It utilizes many to many relationships and many to one relationships to generate and update data.
 
 It was designed using Python, Flask, and MySQL in the backend, and Bootstrap and Javascript for the UI.
 
