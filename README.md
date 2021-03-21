@@ -20,5 +20,5 @@ The following functionality is implemented:
 
 ## Live Demo
 
-[Check out a live demo here of the app.](http://melissalagunas.com/hogwarts/classes#)
+[Check out a live demo here of the app.](http://melissalagunas.com/hogwarts)
 
